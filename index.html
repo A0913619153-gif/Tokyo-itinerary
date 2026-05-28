@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>東京 7 天 6 夜自由行行程 v4</title>
+<title>東京 7 天 6 夜自由行行程 v5</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -160,6 +160,33 @@
     .omamori-grid{grid-template-columns:1fr;}
     .tab-btn{padding:6px 8px;font-size:11px;}
   }
+
+  /* TRANSPORT INLINE STYLE */
+  .tpt { background:#f0f4ff; border-left:3px solid #3949ab; border-radius:0 5px 5px 0; padding:6px 10px; margin:5px 0 8px; font-size:11.5px; line-height:1.8; color:#1a237e; }
+
+  /* ACCORDION */
+  .accordion-wrap { max-width:900px; margin:20px auto 0; padding:0 20px; }
+  .accordion-btn {
+    width:100%; background:var(--ink); color:white; border:none; border-radius:10px;
+    padding:14px 20px; font-size:15px; font-family:'Zen Kaku Gothic New',sans-serif;
+    font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+    letter-spacing:.5px; transition:background .2s;
+  }
+  .accordion-btn:hover { background:#2a2a40; }
+  .accordion-btn .acc-left { display:flex; align-items:center; gap:10px; }
+  .accordion-btn .acc-arrow {
+    font-size:18px; transition:transform .3s; display:inline-block; flex-shrink:0;
+  }
+  .accordion-btn.open .acc-arrow { transform:rotate(180deg); }
+  .accordion-btn.open { border-radius:10px 10px 0 0; }
+  .accordion-body {
+    max-height:0; overflow:hidden; transition:max-height .4s ease;
+    background:white; border:1.5px solid #e0d8cf; border-top:none;
+    border-radius:0 0 10px 10px;
+  }
+  .accordion-body.open { max-height:2000px; }
+  .accordion-inner { padding:16px 20px 20px; }
+  .acc-subtitle { font-size:11px; color:rgba(255,255,255,.55); font-weight:400; margin-left:4px; }
 </style>
 </head>
 <body>
@@ -178,22 +205,35 @@
 </div>
 
 <!-- MUST-SEE -->
-<div class="mustsee-wrap">
-  <div class="mustsee">
-    <div class="mustsee-title">⭐ 必去景點清單</div>
-    <div class="mustsee-grid">
-      <span class="ms-item star">🏰 迪士尼樂園</span>
-      <span class="ms-item star">🌊 迪士尼海洋</span>
-      <span class="ms-item star">🎀 Hello Kitty樂園</span>
-      <span class="ms-item star">🗼 東京晴空塔</span>
-      <span class="ms-item star">⛩️ 淺草寺</span>
-      <span class="ms-item star">🐟 築地場外市場</span>
-      <span class="ms-item">🎮 秋葉原動漫街</span>
-      <span class="ms-item">🌸 上野公園荷花</span>
-      <span class="ms-item">💎 御徒町阿美橫丁</span>
-      <span class="ms-item">🐱 今戸神社招き猫</span>
-      <span class="ms-item">🍑 吉備子屋桃鈴</span>
-      <span class="ms-item">🏬 池袋SUNSHINE</span>
+<div class="accordion-wrap">
+  <button class="accordion-btn" id="btn-mustsee" onclick="toggleAccordion('mustsee')">
+    <span class="acc-left">⭐ 必去景點清單<span class="acc-subtitle">點擊展開／收起</span></span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="accordion-body" id="body-mustsee">
+    <div class="accordion-inner">
+      <div class="mustsee" style="border-radius:8px;background:var(--ink);">
+        <div class="mustsee-grid">
+          <span class="ms-item star">🏰 迪士尼樂園</span>
+          <span class="ms-item star">🌊 迪士尼海洋</span>
+          <span class="ms-item star">🎀 Hello Kitty樂園</span>
+          <span class="ms-item star">🗼 東京晴空塔</span>
+          <span class="ms-item star">⛩️ 淺草寺</span>
+          <span class="ms-item star">🐟 築地場外市場</span>
+          <span class="ms-item star">🌇 SHIBUYA SKY</span>
+          <span class="ms-item star">🗼 東京鐵塔夜景</span>
+          <span class="ms-item star">🚶 淺草人力車</span>
+          <span class="ms-item">🎮 秋葉原動漫街</span>
+          <span class="ms-item">🌀 BEYBLADE BAR</span>
+          <span class="ms-item">🌸 上野公園荷花</span>
+          <span class="ms-item">💎 御徒町阿美橫丁</span>
+          <span class="ms-item">🐱 今戸神社招き猫</span>
+          <span class="ms-item">🍑 吉備子屋桃鈴</span>
+          <span class="ms-item">🏬 池袋SUNSHINE</span>
+          <span class="ms-item">👜 LV 表参道</span>
+          <span class="ms-item">🍣 美登利壽司</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -275,6 +315,92 @@
 </div>
 
 <!-- NOTICE -->
+<!-- ADVANCE BOOKING SECTION -->
+  <div class="accordion-wrap" style="margin-top:14px;">
+  <button class="accordion-btn" id="btn-booking" onclick="toggleAccordion('booking')" style="background:#b5451b;">
+    <span class="acc-left">🎟️ 出發前必買票券清單（重要！）<span class="acc-subtitle">點擊展開／收起</span></span>
+    <span class="acc-arrow">▼</span>
+  </button>
+  <div class="accordion-body" id="body-booking">
+    <div class="accordion-inner" style="padding-top:20px;">
+      <div class="omamori-grid">
+
+      <div class="omamori-card" style="border-left-color:#8e24aa;">
+        <div class="omamori-name">🏰 東京迪士尼樂園（Day 2）</div>
+        <div class="omamori-loc">📅 建議出發前 2個月購票</div>
+        <div class="omamori-desc">官網：tokyo-disneyland.com<br>成人 ¥9,400 / 中學生 ¥7,800 / 兒童 ¥5,600<br>⚠️ 7月暑假旺季，售完即止！DPA 另購</div>
+        <div class="omamori-tags"><span class="otag otag-design">🔴 最優先</span><span class="otag otag-day">Day 2</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#8e24aa;">
+        <div class="omamori-name">🌊 東京迪士尼海洋（Day 3）</div>
+        <div class="omamori-loc">📅 建議出發前 2個月購票</div>
+        <div class="omamori-desc">官網：tokyo-disneyland.com<br>成人 ¥9,400 / 中學生 ¥7,800 / 兒童 ¥5,600<br>⚠️ Fantasy Springs 新區 DPA 極搶手</div>
+        <div class="omamori-tags"><span class="otag otag-design">🔴 最優先</span><span class="otag otag-day">Day 3</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#c2185b;">
+        <div class="omamori-name">🌇 SHIBUYA SKY 17:30場（Day 6）</div>
+        <div class="omamori-loc">📅 建議出發前 2–3個月購票</div>
+        <div class="omamori-desc">官網：shibuya-scramble-square.com/sky<br>成人 ¥2,200（網路預購）/ 現場 ¥2,000<br>⚠️ 17:30–18:00 夕陽場次數個月前即售完！現在就去搶！</div>
+        <div class="omamori-tags"><span class="otag otag-design">🔴 立刻搶票</span><span class="otag otag-day">Day 6</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#e91e8c;">
+        <div class="omamori-name">🎀 Sanrio Puroland（Day 6）</div>
+        <div class="omamori-loc">📅 建議出發前 1個月購票</div>
+        <div class="omamori-desc">官網：puroland.jp<br>成人 ¥4,400 / 3–17歲 ¥3,300<br>SANRIO CAFE 3F 座位需另外預約</div>
+        <div class="omamori-tags"><span class="otag otag-wish">🟡 提前購</span><span class="otag otag-day">Day 6</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#1565c0;">
+        <div class="omamori-name">🚄 Skyliner 來回票（Day 1 & Day 7）</div>
+        <div class="omamori-loc">📅 入境成田後即購 or 提前網路買</div>
+        <div class="omamori-desc">京成電鐵 APP 或官網：keisei.co.jp<br>成人 ¥2,570/次（乗車券+ライナー券）<br>⚠️ 全席指定，7/25 煙火大會當天務必提前買回程！</div>
+        <div class="omamori-tags"><span class="otag otag-health">✅ 入境後買</span><span class="otag otag-day">Day 1 & 7</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#2d6a4f;">
+        <div class="omamori-name">🍣 美登利壽司 澀谷店（Day 6）</div>
+        <div class="omamori-loc">📅 整理券：當天或提前線上取號</div>
+        <div class="omamori-desc">EPARK 整理券系統：epark.jp<br>平日 10:00–13:30 / 17:00–19:30 可線上取號<br>⚠️ 僅能取當日整理券，不可預約指定時間，建議 17:00 開始取號</div>
+        <div class="omamori-tags"><span class="otag otag-health">📱 當天取號</span><span class="otag otag-day">Day 6</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#f57f17;">
+        <div class="omamori-name">🚶 えびす屋 人力車（Day 4）</div>
+        <div class="omamori-loc">📅 建議提前網路預約 30分コース以上</div>
+        <div class="omamori-desc">官網：ebisuya.com/branch/asakusa/<br>5人需2台：30分コース 2人乗り ¥6,000〜<br>⚠️ 17:00黃昏最後班，7月旺季務必預約！</div>
+        <div class="omamori-tags"><span class="otag otag-wish">🟡 提前預約</span><span class="otag otag-day">Day 4</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#00838f;">
+        <div class="omamori-name">🗼 東京鐵塔 メインデッキ（Day 5）</div>
+        <div class="omamori-loc">📅 可當日買，但建議提前網路購</div>
+        <div class="omamori-desc">官網：tokyotower.co.jp / アソビュー<br>成人 ¥1,500 / 中高生 ¥1,000<br>✅ 當日券可買，夜景人氣高，網路購票可免排隊</div>
+        <div class="omamori-tags"><span class="otag otag-health">✅ 建議預購</span><span class="otag otag-day">Day 5</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#555;">
+        <div class="omamori-name">🌀 BEYBLADE BAR（Day 5）</div>
+        <div class="omamori-loc">📅 週末建議提前網路預約</div>
+        <div class="omamori-desc">官網：beyblade.and-gallery.com<br>入場費 ¥770 / 90分フリーバトル<br>Day 5（7/23 週四）平日，當日入場機率高</div>
+        <div class="omamori-tags"><span class="otag otag-lucky">🟢 平日可當日</span><span class="otag otag-day">Day 5</span></div>
+      </div>
+
+      <div class="omamori-card" style="border-left-color:#888;">
+        <div class="omamori-name">🌸 晴空塔 天望甲板（Day 4）</div>
+        <div class="omamori-loc">📅 建議網路提前購票</div>
+        <div class="omamori-desc">官網：tokyo-skytree.jp<br>成人 ¥3,100 / 中高生 ¥1,550<br>✅ 當日也可買，夏季旺季建議事前購</div>
+        <div class="omamori-tags"><span class="otag otag-health">✅ 建議預購</span><span class="otag otag-day">Day 4</span></div>
+      </div>
+
+    </div>
+      <div style="font-size:11.5px;color:var(--muted);padding:8px 2px 0;">⚠️ 票券庫存與售票資訊以各官網為準，出發前再次確認。</div>
+    </div>
+  </div>
+</div>
+
 <div class="notice-section">
   <div class="notice">
     🌸 <strong>7月注意：</strong>夏季祭典旺季！隅田川煙火大會約7/25舉行，住在曳舟（墨田區）有機會欣賞！氣溫32–36°C，請防曬補水。<br>
@@ -308,7 +434,7 @@
     <button class="tab-btn" onclick="showDay(2)">Day 3<br><span style="font-size:10px;font-weight:400">7/21 迪士尼海洋</span></button>
     <button class="tab-btn" onclick="showDay(3)">Day 4<br><span style="font-size:10px;font-weight:400">7/22 淺草・人力車</span></button>
     <button class="tab-btn" onclick="showDay(4)">Day 5<br><span style="font-size:10px;font-weight:400">7/23 秋葉原・鐵塔</span></button>
-    <button class="tab-btn" onclick="showDay(5)">Day 6<br><span style="font-size:10px;font-weight:400">7/24 Kitty・原宿・池袋</span></button>
+    <button class="tab-btn" onclick="showDay(5)">Day 6<br><span style="font-size:10px;font-weight:400">7/24 Kitty・澀谷・LV</span></button>
     <button class="tab-btn" onclick="showDay(6)">Day 7<br><span style="font-size:10px;font-weight:400">7/25 築地・LV・回程</span></button>
   </div>
 
@@ -441,7 +567,9 @@
             <div class="spot-num">7</div>
             <div class="spot-info">
               <div class="spot-name">🧳 日暮里 取行李 → 曳舟旅館 Check-in</div>
-              <div class="spot-desc">15:30 返回日暮里取行李，搭 <strong>東武伊勢崎線</strong>至曳舟（約20分），16:00 正式 Check-in，整理房間稍作休息。</div>
+              <div class="spot-desc">🚉 <strong>秋葉原駅</strong> → <em>JR山手線</em> → <strong>日暮里駅</strong>（取行李）→ <em>京成本線</em> → <strong>押上駅</strong> → <em>東武伊勢崎線</em> → <strong>曳舟駅</strong>（旅館）<br>
+              ⏱ 約30分 ／ 💴 約¥300/人（Suica）<br>
+              📌 15:30 出發，16:00 抵達旅館正式 Check-in</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 15:30出發</span><span class="tag tag-train">🚉 曳舟站</span></div>
           </div>
@@ -501,7 +629,9 @@
             <div class="spot-num">1</div>
             <div class="spot-info">
               <div class="spot-name">🚉 曳舟 → 舞濱（迪士尼）</div>
-              <div class="spot-desc">曳舟→押上（東武）→大手町（半藏門線）→舞濱（JR京葉線）約50分。<strong>建議 08:30 前抵達</strong>搶 DPA 名額，平日開園時間約 09:00。</div>
+              <div class="spot-desc">🚉 <strong>曳舟駅</strong> → <em>東武伊勢崎線</em> → <strong>押上駅</strong> → <em>東京Metro半藏門線</em> → <strong>大手町駅</strong> → <em>JR京葉線</em> → <strong>舞濱駅</strong>（步行5分至入口）<br>
+              ⏱ 約50分 ／ 💴 約¥500/人（Suica）<br>
+              📌 建議 08:30 前抵達搶 DPA 名額，平日開園約 09:00</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 50分鐘</span><span class="tag tag-train">🚉 舞濱站</span></div>
           </div>
@@ -700,7 +830,8 @@
             <div class="spot-num must">1</div>
             <div class="spot-info">
               <div class="spot-name">⛩️ 淺草寺本堂參拜 ＋ 仲見世通<span class="must-badge">必去</span></div>
-              <div class="spot-desc">朝早人少最佳。必拍雷門大紅燈籠！仲見世通必買：人形燒、雷おこし。</div>
+              <div class="spot-desc">🚉 <strong>曳舟駅</strong> → <em>東武伊勢崎線</em> → <strong>浅草駅</strong>（東武浅草）<br>⏱ 約3分 ／ 💴 ¥160/人（Suica）<br>
+              朝早人少最佳。必拍雷門大紅燈籠！仲見世通必買：人形燒、雷おこし。</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 60分鐘</span><span class="tag tag-train">🚉 淺草站</span><span class="tag tag-open">🕐 06:00開</span></div>
           </div>
@@ -730,7 +861,7 @@
             <div class="spot-num must">4</div>
             <div class="spot-info">
               <div class="spot-name">🍑 吉備子屋 浅草店 — 粉桃御守桃鈴根付<span class="must-badge">必去</span></div>
-              <div class="spot-desc">地址：<strong>台東区浅草1丁目37-2</strong>（仲見世通り裏）。<br>
+              <div class="spot-desc">🚶 今戸神社から徒歩約20分 → 浅草仲見世通り裏<br>地址：<strong>台東区浅草1丁目37-2</strong>（仲見世通り裏）。<br>
               <strong>桃鈴根付</strong>：桃子造型鈴鐺，搖動有聲，職人手工，款式超多（花、動物、干支、流行物）¥1,000–1,500。中國風水桃象徵戀愛，外國觀光客瘋搶！<br>
               <strong>吉備糰子</strong>：現點現做，黍米糰子＋黃豆粉，邊坐邊吃 ¥250/5本。</div>
             </div>
@@ -757,7 +888,8 @@
             <div class="spot-num must">5</div>
             <div class="spot-info">
               <div class="spot-name">🗼 東京晴空塔 ＋ Solamachi<span class="must-badge">必去</span></div>
-              <div class="spot-desc">曳舟步行即達！天望甲板（350m）¥3,100 成人，夏季俯瞰東京。<br>
+              <div class="spot-desc">🚉 <strong>浅草駅</strong> → <em>東京Metro銀座線</em> → <strong>押上駅</strong>（直上晴空塔 Solamachi）<br>⏱ 約4分 ／ 💴 ¥180/人（Suica）<br>
+              天望甲板（350m）¥3,100 成人，夏季俯瞰東京。<br>
               底層 Solamachi：<strong>POKEMON CENTER 東京DX（6F）</strong>，限定寶可夢商品，青少年必瘋！</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 2小時</span><span class="tag tag-train">🚉 押上站</span><span class="tag tag-open">🕐 10:00–21:00</span></div>
@@ -774,7 +906,7 @@
             <div class="spot-num">7</div>
             <div class="spot-info">
               <div class="spot-name">🌊 隅田公園河畔散步</div>
-              <div class="spot-desc">晴空塔旁步行至隅田公園，夏季有祭典佈置。若7/25是隅田川煙火大會，此為絕佳觀賞地！</div>
+              <div class="spot-desc">🚶 Solamachi から徒歩約5分 → 隅田公園<br>晴空塔旁步行至隅田公園，夏季有祭典佈置。若7/25是隅田川煙火大會，此為絕佳觀賞地！</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 40分鐘</span><span class="tag tag-walk">🚶 步行</span></div>
           </div>
@@ -788,7 +920,8 @@
             <div class="spot-num must">8</div>
             <div class="spot-info">
               <div class="spot-name">🚶 えびす屋 浅草店 — 黃昏人力車<span class="must-badge">必體驗</span></div>
-              <div class="spot-desc">搭地鐵回淺草（押上→淺草 約10分）。<strong>雷門前 えびす屋</strong> 最後黃昏班約 17:00。<br>
+              <div class="spot-desc">🚉 <strong>押上駅</strong> → <em>東京Metro銀座線</em> → <strong>浅草駅</strong>（1番出口より徒步1分→雷門前）<br>⏱ 約4分 ／ 💴 ¥180/人（Suica）<br>
+              <strong>雷門前 えびす屋</strong> 最後黃昏班約 17:00。<br>
               • <strong>30分コース（2人乗り）</strong>：¥6,000〜，淺草寺→隅田川→スカイツリー眺望ルート<br>
               • <strong>60分コース</strong>：¥11,000〜，含仲見世通り裏・待乳山聖天・隅田川河畔<br>
               • 夕陽下的雷門燈籠＋晴空塔剪影，拍照絕美！俥夫幫忙拍大量美照📸<br>
@@ -908,7 +1041,7 @@
             <div class="spot-num must">5</div>
             <div class="spot-info">
               <div class="spot-name">🌸 上野公園 — 不忍池荷花盛開<span class="must-badge">必看</span></div>
-              <div class="spot-desc">JR山手線一站。7月不忍池荷花盛開，清幽絕美打卡！可小憩納涼。</div>
+              <div class="spot-desc">🚉 <strong>秋葉原駅</strong> → <em>JR山手線（外回り）</em> → <strong>上野駅</strong>（1駅）<br>⏱ 約3分 ／ 💴 ¥150/人（Suica）<br>7月不忍池荷花盛開，清幽絕美打卡！可小憩納涼。</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 45分鐘</span><span class="tag tag-train">🚉 上野站</span><span class="tag tag-open">🕐 05:00–23:00</span></div>
           </div>
@@ -916,7 +1049,7 @@
             <div class="spot-num must">6</div>
             <div class="spot-info">
               <div class="spot-name">💎 御徒町 アメ横（阿美橫丁）<span class="must-badge">必逛</span></div>
-              <div class="spot-desc">庶民商店街，生鮮海鮮、藥妝、零食、二手表，熱鬧非凡！採購伴手禮最划算。</div>
+              <div class="spot-desc">🚶 上野駅から徒歩約5分 → 御徒町・アメ横<br>庶民商店街，生鮮海鮮、藥妝、零食、二手表，熱鬧非凡！採購伴手禮最划算。</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 90分鐘</span><span class="tag tag-train">🚉 御徒町站</span><span class="tag tag-open">🕐 10:00–20:00</span></div>
           </div>
@@ -935,18 +1068,38 @@
         </div>
       </div>
       <div class="section">
-        <div class="section-header"><div class="section-icon icon-night">🗼</div><div class="section-label">夜間 ／ 東京鐵塔夜景（20:30–22:00）</div></div>
+        <div class="section-header"><div class="section-icon icon-afternoon">🌀</div><div class="section-label">晚餐前 ／ BEYBLADE BAR TOKYO 下北沢（18:00–19:30）</div></div>
         <div class="spots">
           <div class="spot">
             <div class="spot-num must">7</div>
             <div class="spot-info">
+              <div class="spot-name">🌀 BEYBLADE BAR TOKYO — 下北沢<span class="must-badge">必去</span></div>
+              <div class="spot-desc">🚉 <strong>御徒町駅</strong> → <em>JR山手線（内回り）</em> → <strong>渋谷駅</strong> → <em>京王井の頭線</em> → <strong>下北沢駅</strong>（東口）→ 徒歩3分 → mosia ビル4F<br>⏱ 約30分 ／ 💴 約¥400/人（Suica）<br><br>
+              <strong>地址：東京都世田谷区北沢2-4-5 mosia ビル4F</strong><br>
+              • 入場費 ¥770 / フリーバトル 90分（貸し出しあり）<br>
+              • 限定グッズ（BAR限定 Wizard Arc 黑金屬塗層 ¥1,800）<br>
+              • 聯名料理：Dragoon Storm 蛋包燉飯 ¥1,800、Storm Pegasis 藍色義麵 ¥1,800<br>
+              • 來客贈送限定貼紙（可貼在陀螺上！）<br>
+              ⚠️ 16歳未満は18:00まで，保護者同伴なら21:30まで可。7/23（週四）平日當日入場機率高，建議官網確認</div>
+            </div>
+            <div class="spot-meta"><span class="tag tag-time">⏱ 90分鐘</span><span class="tag tag-train">🚉 下北沢駅</span><span class="tag tag-open">🕐 11:00–21:30</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header"><div class="section-icon icon-night">🗼</div><div class="section-label">夜間 ／ 東京鐵塔夜景（20:30–22:00）</div></div>
+        <div class="spots">
+          <div class="spot">
+            <div class="spot-num must">8</div>
+            <div class="spot-info">
               <div class="spot-name">🗼 東京鐵塔 夜景<span class="must-badge">必去</span></div>
-              <div class="spot-desc">御徒町→東京鐵塔（大江戶線→赤羽橋駅 徒步7分，或都営浅草線→大門駅 徒步10分）約25分。<br>
+              <div class="spot-desc">🚉 <strong>下北沢駅</strong> → <em>京王井の頭線</em> → <strong>渋谷駅</strong> → <em>都営浅草線（直通 or 乗換）</em> → <strong>大門駅</strong> → 徒步10分 → 東京鐵塔<br>⏱ 約35分 ／ 💴 約¥350/人（Suica）<br>
               • <strong>メインデッキ（150m）</strong>：¥1,500 成人，09:00–23:00（最終入場22:30）<br>
               • <strong>トップデッキツアー（250m）</strong>：¥3,000〜，事前網路預約較優惠<br>
               • 20:00 後東京夜景最美！月曜・木曜限定「ダイヤモンドヴェール」彩色燈光秀超壯觀🌈<br>
               • 鐵塔腳下 <strong>フットタウン</strong> 有紀念品商店，限定東京鐵塔周邊必買<br>
-              • 看完夜景約 22:00，搭地鐵回曳舟約 22:45，不算太晚！</div>
+              • 🚉 <strong>大門駅</strong> → <em>都営浅草線</em> → <strong>浅草駅</strong> → <em>東武伊勢崎線</em> → <strong>曳舟駅</strong><br>⏱ 約25分 ／ 💴 約¥300/人（Suica）<br>📌 看完夜景約 22:00，約 22:30 返抵旅館</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 90分鐘</span><span class="tag tag-train">🚉 赤羽橋站</span><span class="tag tag-open">🕐 09:00–23:00</span></div>
           </div>
@@ -962,8 +1115,8 @@
     <div class="day-header">
       <div>
         <div class="day-num">Day 06 ／ 2026.07.24 Fri</div>
-        <div class="day-title">🎀 Hello Kitty 樂園 × 原宿 Sanrio × 表参道 LV × 池袋</div>
-        <div class="day-subtitle">Puroland → 原宿竹下通り → 表参道 LV → 池袋逛街血拼</div>
+        <div class="day-title">🎀 Kitty 樂園 × 原宿 Sanrio × 🌇 SHIBUYA SKY × 🍣 美登利 × 👜 LV × 池袋</div>
+        <div class="day-subtitle">Puroland → 原宿 → 澀谷（SHIBUYA SKY＋美登利）→ 表参道 LV → 池袋</div>
       </div>
       <div class="day-badges">
         <span class="day-badge bg-purple">🎟️ Puroland 需提前購票</span>
@@ -975,6 +1128,8 @@
       <div class="hours-row">
         <span class="h-item">🎀 Puroland <strong>10:00–17:00</strong>（夏季延長~20:00）</span>
         <span class="h-item">🎀 Sanrio 原宿店 <strong>11:00–19:00</strong></span>
+        <span class="h-item">🌇 SHIBUYA SKY <strong>17:30場🔴搶票</strong></span>
+        <span class="h-item">🍣 美登利澀谷 <strong>17:00–21:00</strong></span>
         <span class="h-item">👜 LV 表参道 <strong>11:00–20:00</strong></span>
         <span class="h-item">🏬 池袋 <strong>10:00–21:00</strong></span>
       </div>
@@ -997,7 +1152,8 @@
             <div class="spot-num">1</div>
             <div class="spot-info">
               <div class="spot-name">🚇 曳舟 → Sanrio Puroland（多摩センター）</div>
-              <div class="spot-desc">曳舟→押上（東武）→渋谷（半藏門線）→京王多摩センター（京王線特急）約60分。</div>
+              <div class="spot-desc">🚉 <strong>曳舟駅</strong> → <em>東武伊勢崎線</em> → <strong>押上駅</strong> → <em>東京Metro半藏門線</em> → <strong>渋谷駅</strong> → <em>京王線 特急</em> → <strong>京王多摩センター駅</strong>（步行5分至入口）<br>
+              ⏱ 約60分 ／ 💴 約¥700/人（Suica）</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 60分鐘</span><span class="tag tag-train">🚉 京王多摩センター</span></div>
           </div>
@@ -1056,29 +1212,61 @@
       </div>
 
       <div class="section">
-        <div class="section-header"><div class="section-icon icon-afternoon">👜</div><div class="section-label">下午 ／ 表参道 Louis Vuitton 旗艦店（16:30–17:30）</div></div>
+        <div class="section-header"><div class="section-icon icon-evening">🌇</div><div class="section-label">黃昏 ／ SHIBUYA SKY 夕陽場次（17:30–18:30）⚠️需提前搶票</div></div>
         <div class="spots">
           <div class="spot">
             <div class="spot-num must">4</div>
             <div class="spot-info">
-              <div class="spot-name">👜 Louis Vuitton 表参道店 — 旗艦店看包<span class="must-badge">必訪</span></div>
-              <div class="spot-desc">原宿→表参道步行約10分鐘，或搭東京Metro 1站。<br>
-              <strong>地址：東京都渋谷区神宮前5-7-5（表参道ビル 1F–6F）</strong><br>
-              • LV 在東京最完整的旗艦店，包款、皮件、配件、服裝全系列都有<br>
-              • 7F「エスパス ルイ・ヴィトン東京」是免費藝術展覽空間，打卡超美！<br>
-              • 夏季限定款、日本限定商品在此最齊全<br>
-              • 建議平日下午前往，人流較少，店員服務更從容<br>
-              ⚠️ 旺季可能需在門口等候入場，請有耐心。</div>
+              <div class="spot-name">🌇 SHIBUYA SKY — 17:30 夕陽場次<span class="must-badge">🔴立刻搶票</span></div>
+              <div class="spot-desc">🚉 <strong>原宿駅</strong> → <em>JR山手線（内回り）</em> → <strong>渋谷駅</strong> → 渋谷スクランブルスクエア 14F<br>⏱ 約5分 ／ 💴 ¥150/人（Suica）<br><br>
+              <strong>渋谷上空229m，360度景觀展望台！</strong><br>
+              • 成人 ¥2,200（網路預購）/ ¥2,000（現場）<br>
+              • 17:30–18:00 夕陽場次是全年最搶手！<strong>出發前 2–3個月就要搶票</strong><br>
+              • 屋上 SKY STAGE（屋外）＋46F SKY GALLERY（室內）<br>
+              • 可同時欣賞澀谷十字路口俯瞰夜景＋富士山（天氣好時）<br>
+              🌐 官網：shibuya-scramble-square.com/sky/ticket/</div>
             </div>
-            <div class="spot-meta"><span class="tag tag-time">⏱ 60分鐘</span><span class="tag tag-train">🚉 表参道站</span><span class="tag tag-open">🕐 11:00–20:00</span></div>
+            <div class="spot-meta"><span class="tag tag-time">⏱ 60分鐘</span><span class="tag tag-train">🚉 渋谷駅</span><span class="tag tag-open">🕐 10:00–22:30</span></div>
           </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header"><div class="section-icon icon-food">🍣</div><div class="section-label">晚餐 ／ 梅丘壽司美登利 澀谷店（19:00）⚠️EPARK取號</div></div>
+        <div class="spots">
           <div class="spot">
-            <div class="spot-num">5</div>
+            <div class="spot-num must">5</div>
             <div class="spot-info">
-              <div class="spot-name">🛍️ 表参道ヒルズ / Omotesando Hills 順逛</div>
-              <div class="spot-desc">LV 旁的高端購物中心，Chanel、Dior、Prada 等精品，或逛 agnès b. 等設計師品牌，適合血拼精品或拍照打卡。</div>
+              <div class="spot-name">🍣 梅丘寿司の美登利 澀谷店<span class="must-badge">必吃</span></div>
+              <div class="spot-desc">🚶 渋谷スクランブルスクエアから徒歩約5分 → 渋谷マークシティ イーストモール4F<br>📌 步行即可<br><br>
+              <strong>地址：東京都渋谷区道玄坂1-12-3 マークシティイースト4F</strong><br>
+              • 新鮮大ネタ寿司，CP 值超高！名物「元祖穴子一本付」必點<br>
+              • 平均消費 ¥3,000/人<br>
+              • <strong>EPARK 整理券</strong>：當天 17:00 開始線上取號，店內發券或 App 遠端取號<br>
+              📱 建議 17:00 一到即用手機在 EPARK App 取號（epark.jp），等候期間逛 SHIBUYA SKY！<br>
+              ⚠️ 平日 11:00–15:00 / 17:00–21:00，週末 11:00–21:00，15:00–17:00 休息</div>
             </div>
-            <div class="spot-meta"><span class="tag tag-time">⏱ 30分鐘</span><span class="tag tag-walk">🚶 步行</span><span class="tag tag-open">🕐 11:00–21:00</span></div>
+            <div class="spot-meta"><span class="tag tag-time">⏱ 90分鐘</span><span class="tag tag-walk">🚶 渋谷</span><span class="tag tag-open">🕐 17:00–21:00</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header"><div class="section-icon icon-afternoon">👜</div><div class="section-label">傍晚 ／ LV 表参道旗艦店（19:30 若有時間）</div></div>
+        <div class="spots">
+          <div class="spot">
+            <div class="spot-num must">6</div>
+            <div class="spot-info">
+              <div class="spot-name">👜 Louis Vuitton 表参道店<span class="must-badge">必訪</span></div>
+              <div class="spot-desc">🚉 <strong>渋谷駅</strong> → <em>東京Metro銀座線</em> → <strong>表参道駅</strong><br>⏱ 約3分 ／ 💴 ¥180/人（Suica）<br><br>
+              <strong>地址：東京都渋谷区神宮前5-7-5（表参道ビル 1F–6F）</strong><br>
+              • LV 東京最完整旗艦店，包款、皮件、配件全系列<br>
+              • 7F「エスパス ルイ・ヴィトン東京」免費藝術展覽空間，打卡超美！<br>
+              • 退稅：¥5,000以上持護照辦 TAX FREE，約退 8%<br>
+              ⚠️ 美登利用餐後約 19:30 前往，20:00 閉店，請注意時間！<br>
+              💡 若時間不夠，可改 Day 7 銀座並木通り店（同樣完整）</div>
+            </div>
+            <div class="spot-meta"><span class="tag tag-time">⏱ 60分鐘</span><span class="tag tag-train">🚉 表参道駅</span><span class="tag tag-open">🕐 11:00–20:00</span></div>
           </div>
         </div>
       </div>
@@ -1112,7 +1300,7 @@
           <div class="food-row">
             <div class="food-meal">🥩 晚餐</div>
             <div class="food-options">
-              <span class="opt">池袋「叙々苑」— 高級燒肉名店，旅行前倒數大餐 ¥4,000+/人（17:00–23:00）</span>
+              <span class="opt">🚶 池袋駅周辺 徒歩圈内<br>池袋「叙々苑」— 高級燒肉名店，旅行前倒數大餐 ¥4,000+/人（17:00–23:00）</span>
               <span class="opt">池袋「東京とんかつ会議」— 黑豬排外脆內嫩 ¥1,800（11:00–23:00）</span>
             </div>
           </div>
@@ -1157,7 +1345,8 @@
             <div class="spot-num must">1</div>
             <div class="spot-info">
               <div class="spot-name">🐟 築地場外市場<span class="must-badge">必去</span></div>
-              <div class="spot-desc">曳舟→押上→大手町→築地市場（大江戶線）約35分。<strong>07:00–08:00 最新鮮！</strong><br>
+              <div class="spot-desc">🚉 <strong>曳舟駅</strong> → <em>東武伊勢崎線</em> → <strong>押上駅</strong> → <em>東京Metro半藏門線</em> → <strong>大手町駅</strong> → <em>都営大江戶線</em> → <strong>築地市場駅</strong><br>⏱ 約35分 ／ 💴 約¥350/人（Suica）<br>
+              <strong>07:00–08:00 最新鮮！</strong><br>
               必吃：海膽蟹子飯、玉子燒、生魚片串、生蠔，邊走邊吃超過癮！</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 2小時</span><span class="tag tag-train">🚉 築地市場站</span><span class="tag tag-open">🕐 06:00–13:00</span></div>
@@ -1218,7 +1407,7 @@
             <div class="spot-num must">4</div>
             <div class="spot-info">
               <div class="spot-name">💄 Ginza Six ＋ 松屋地下食品<span class="must-badge">必逛</span></div>
-              <div class="spot-desc">LV旁步行即達。<br>
+              <div class="spot-desc">🚶 LV 銀座から徒歩約3分 → Ginza Six<br>
               • <strong>Ginza Six 屋上庭園</strong>：免費觀景台，俯瞰銀座，絕佳打卡點<br>
               • <strong>松屋地下食品區</strong>：高級和菓子、茶葉、巧克力，伴手禮最後補充</div>
             </div>
@@ -1228,7 +1417,7 @@
             <div class="spot-num">5</div>
             <div class="spot-info">
               <div class="spot-name">💊 松本清 最後藥妝補貨</div>
-              <div class="spot-desc">銀座多家藥妝，補齊：玻尿酸面膜、眼藥水、退燒貼、零食。購物滿 ¥5,000 出境前退稅！</div>
+              <div class="spot-desc">🚶 銀座駅周辺 徒歩圈内<br>銀座多家藥妝，補齊：玻尿酸面膜、眼藥水、退燒貼、零食。購物滿 ¥5,000 出境前退稅！</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">⏱ 45分鐘</span><span class="tag tag-walk">🚶 步行</span><span class="tag tag-open">🕐 09:00–21:00</span></div>
           </div>
@@ -1263,8 +1452,9 @@
             <div class="spot-num">7</div>
             <div class="spot-info">
               <div class="spot-name">🚄 曳舟 → 成田機場（Skyliner）</div>
-              <div class="spot-desc">押上→京成上野（京成押上線）→成田機場（<strong>Skyliner</strong> 約41分，¥2,570）。<br>
-              <strong>建議 18:30 前抵達機場</strong>，預留 3.5 小時退稅、出境、免稅採購。</div>
+              <div class="spot-desc">🚉 <strong>曳舟駅</strong> → <em>東武伊勢崎線</em> → <strong>押上駅</strong> → <em>京成押上線</em> → <strong>京成上野駅</strong> → <em>京成スカイライナー</em> → <strong>成田空港駅</strong><br>⏱ 曳舟→京成上野 約20分 ＋ Skyliner 41分 ／ 合計約 60分<br>💴 ¥2,570/人（Skyliner 乗車券＋ライナー券）<br>
+              ⚠️ <strong>全席指定！事前購票或 APP 預約座位</strong>（7/25 煙火大會當天人潮多，務必有票）<br>
+              建議 <strong>18:30 前抵達機場</strong>，預留 3.5 小時退稅、出境、免稅採購。</div>
             </div>
             <div class="spot-meta"><span class="tag tag-time">✈️ 16:00出發</span><span class="tag tag-train">🚉 Skyliner</span></div>
           </div>
@@ -1303,6 +1493,14 @@
 </footer>
 
 <script>
+
+  function toggleAccordion(id) {
+    const btn = document.getElementById('btn-' + id);
+    const body = document.getElementById('body-' + id);
+    btn.classList.toggle('open');
+    body.classList.toggle('open');
+  }
+
   function showDay(idx){
     document.querySelectorAll('.day-card').forEach((c,i)=>c.classList.toggle('active',i===idx));
     document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
