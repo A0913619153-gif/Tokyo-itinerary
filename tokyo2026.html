@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>東京 7 天 6 夜自由行 2026</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- Google Fonts (Noto Sans TC) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            aquagreen: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6', /* 主色調：水綠色 */
+              600: '#0d9488',
+              700: '#0f766e',
+            }
+          },
+          fontFamily: {
+            sans: ['Noto Sans TC', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* 隱藏滾動條但保留滾動功能 */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen pb-12">
+
+  <div id="app" class="max-w-md mx-auto bg-white shadow-xl min-h-screen flex flex-col relative">
+    
+    <!-- Header 頂部資訊 -->
+    <header class="bg-gradient-to-r from-aquagreen-500 to-aquagreen-600 text-white p-6 rounded-b-[2rem] shadow-md">
+      <div class="flex justify-between items-start">
+        <div>
+          <span class="bg-aquagreen-700 bg-opacity-40 text-xs px-3 py-1 rounded-full font-medium">Tokyo Adventure 2026</span>
+          <h1 class="text-2xl font-bold mt-2">東京 7 天 6 夜自由行</h1>
+          <p class="text-xs text-aquagreen-100 mt-1">2026.07.19 – 07.25 | 喬宇 & 芝穎</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs block text-aquagreen-100">預估氣溫</span>
+          <span class="text-lg font-bold">32-36°C ☀️</span>
+        </div>
+      </div>
+      
+      <!-- 提醒小區塊 -->
+      <div class="mt-4 bg-white bg-opacity-15 p-3 rounded-xl text-xs text-aquagreen-50">
+        📌 <strong>夏祭特別注意：</strong> 7/25 隅田川煙火大會！當天下午 15:00 起曳舟周邊大範圍交通管制。中午前務必將行李拉離曳舟寄放到上野！
+      </div>
+    </header>
+
+    <!-- 摺疊功能清單區 -->
+    <main class="p-4 flex-1 space-y-3">
+      
+      <!-- 卡片 1: 必備票券與任務 -->
+      <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
+        <button @click="toggleSection('tickets')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
+          <span>🎟️ 出發前必買票券 & 任務</span>
+          <span class="text-xs">{{ isOpen.tickets ? '▲ 收起' : '▼ 展開' }}</span>
+        </button>
+        <div v-show="isOpen.tickets" class="p-4 text-xs space-y-2 text-slate-600 border-t border-aquagreen-100">
+          <ul class="list-disc list-inside space-y-1.5">
+            <li><strong>迪士尼雙樂園門票：</strong>請提早 2 個月於官網搶購（Land & Sea）。</li>
+            <li><strong>三麗鷗彩虹樂園門票：</strong>7 月為旺季，建議提早於官網/平台購票。</li>
+            <li><strong>SHIBUYA SKY 門票：</strong>出發前 2-3 個月務必搶到 7/19 16:40 的夕陽場。</li>
+            <li><strong>限定版 Suica 卡：</strong>抵達機場後前往 JR 東日本服務中心詢問購買。</li>
+            <li><strong>加熱菸注意事項：</strong>僅限日本境內使用，機器與菸彈切勿帶回台灣（違法）。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 卡片 2: 御守與配鏡指南 -->
+      <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
+        <button @click="toggleSection('omamori')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
+          <span>⛩️ 專屬御守與配鏡追蹤</span>
+          <span class="text-xs">{{ isOpen.omamori ? '▲ 收起' : '▼ 展開' }}</span>
+        </button>
+        <div v-show="isOpen.omamori" class="p-4 text-xs space-y-3 text-slate-600 border-t border-aquagreen-100">
+          <div>
+            <span class="font-bold text-slate-700 block mb-1">👓 配鏡時程（日本眼鏡市場）</span>
+            <ul class="list-disc list-inside space-y-0.5 text-slate-500">
+              <li><strong>Day 1 (7/19)：</strong> 澀谷店/上野店送件</li>
+              <li><strong>Day 4 (7/22)：</strong> 確認完工 ➔ <strong>今天順路提前取鏡！</strong></li>
+            </ul>
+          </div>
+          <hr class="border-slate-100">
+          <div>
+            <span class="font-bold text-slate-700 block mb-1.5">📍 御守採購清單</span>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <span class="font-bold text-aquagreen-700 block">淺草寺</span>
+                <span>桃形御守（保平安、開運）</span>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <span class="font-bold text-aquagreen-700 block">今戶神社</span>
+                <span>招財貓（黑色限定款）</span>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <span class="font-bold text-aquagreen-700 block">吉備子屋</span>
+                <span>特色桃鈴（開運避邪）</span>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <span class="font-bold text-aquagreen-700 block">烏森神社</span>
+                <span>黑色御守（癌封じ，新橋站）</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App風：橫向滑動日期選擇列 -->
+      <div class="py-2">
+        <h3 class="text-sm font-bold text-slate-500 mb-2 px-1">選擇行程日期</h3>
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-2 px-1 snap-x">
+          <button 
+            v-for="(day, index) in itinerary" 
+            :key="index"
+            @click="activeDay = index"
+            class="flex-shrink-0 w-20 py-3 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 snap-center shadow-sm"
+            :class="activeDay === index ? 'bg-aquagreen-500 text-white font-bold scale-105 shadow-aquagreen-200' : 'bg-white border border-slate-200 text-slate-500'"
+          >
+            <span class="text-[10px] uppercase opacity-80">Day {{ day.dayNum }}</span>
+            <span class="text-sm my-0.5">{{ day.date }}</span>
+            <span class="text-[10px] opacity-90">{{ day.week }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 每日行程卡片 -->
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-4">
+        
+        <!-- 當日主題 -->
+        <div class="border-b border-slate-100 pb-3">
+          <div class="flex items-center space-x-2">
+            <span class="bg-aquagreen-100 text-aquagreen-700 text-xs font-bold px-2.5 py-1 rounded-full">Day {{ currentDay.dayNum }}</span>
+            <span class="text-xs text-slate-400 font-medium">{{ currentDay.fullDate }}</span>
+          </div>
+          <h2 class="text-lg font-bold text-slate-800 mt-1">{{ currentDay.theme }}</h2>
+        </div>
+
+        <!-- 每日時間軸 (Timeline) -->
+        <div class="space-y-4 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-slate-100 before:pointer-events-none">
+          <div v-for="(item, idx) in currentDay.timeline" :key="idx" class="flex space-x-4 relative items-start">
+            <!-- 時間軸圓點 -->
+            <div class="w-7 h-7 flex-shrink-0 rounded-full bg-aquagreen-50 border-2 border-aquagreen-500 flex items-center justify-center z-10 text-[10px] text-aquagreen-600 font-bold bg-white">
+              {{ idx + 1 }}
+            </div>
+            <!-- 行程內容 -->
+            <div class="flex-1 bg-slate-50 p-3 rounded-xl">
+              <div class="flex justify-between items-baseline mb-1">
+                <span class="text-xs font-bold text-aquagreen-600">{{ item.time }}</span>
+                <span v-if="item.tag" class="text-[9px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded font-bold">{{ item.tag }}</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-800" v-html="item.title"></h4>
+              <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed" v-html="item.desc"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 當日美食卡片 -->
+        <div class="border-t border-slate-100 pt-4 space-y-2">
+          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">🍴 推薦餐飲清單</h3>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="bg-orange-50 p-2.5 rounded-xl text-center">
+              <span class="text-[9px] text-orange-600 font-bold block">🍳 早餐</span>
+              <p class="text-[10px] font-bold text-slate-700 mt-1 truncate" :title="currentDay.meals.breakfast">{{ currentDay.meals.breakfast }}</p>
+            </div>
+            <div class="bg-orange-50 p-2.5 rounded-xl text-center">
+              <span class="text-[9px] text-orange-600 font-bold block">🍱 午餐</span>
+              <p class="text-[10px] font-bold text-slate-700 mt-1 truncate" :title="currentDay.meals.lunch">{{ currentDay.meals.lunch }}</p>
+            </div>
+            <div class="bg-orange-50 p-2.5 rounded-xl text-center">
+              <span class="text-[9px] text-orange-600 font-bold block">🍺 晚餐</span>
+              <p class="text-[10px] font-bold text-slate-700 mt-1 truncate" :title="currentDay.meals.dinner">{{ currentDay.meals.dinner }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Footer 底部作者資訊 -->
+    <footer class="py-4 text-center border-t border-slate-100 text-[10px] text-slate-400">
+      Made with 💚 for 喬宇 & 芝穎's Tokyo Adventure 2026
+    </footer>
+  </div>
+
+  <script>
+    const { createApp, ref, computed } = Vue;
+
+    createApp({
+      setup() {
+        const activeDay = ref(0);
+        const isOpen = ref({
+          tickets: false,
+          omamori: false
+        });
+
+        const toggleSection = (section) => {
+          isOpen.value[section] = !isOpen.value[section];
+        };
+
+        const itinerary = ref([
+          {
+            dayNum: "1",
+            date: "7/19",
+            week: "週日",
+            fullDate: "2026.07.19 (Sun)",
+            theme: "成田入境 × 澀谷配鏡與夜景",
+            meals: { breakfast: "機場輕食", lunch: "澀谷星乃珈琲", dinner: "晴空塔六厘舍沾麵" },
+            timeline: [
+              { time: "11:15", title: "抵達成田機場", desc: "入境後前往 JR East Travel Service Center 詢問並購買限定設計款 Suica，每人加值約 ¥5,000 - ¥8,000。" },
+              { time: "11:30", title: "機場便利商店買菸", desc: "在機場超商（FamilyMart/NewDays）採購加熱式菸品機器與菸彈。<br><strong class='text-red-500'>* 帶回台灣違法，僅限日本期間使用！</strong>" },
+              { time: "12:30", title: "包車直達曳舟旅館", desc: "<strong>【專車直送】</strong> 包車直送曳舟旅館，5人大行李免搬運！先在旅館寄放行李。" },
+              { time: "14:15", title: "澀谷配鏡送件 & 逛街", desc: "前往眼鏡行（JINS/OWNDAYS）辦理<strong>配鏡送件</strong>。隨後在澀谷、原宿周邊輕裝逛街。" },
+              { time: "16:40", title: "SHIBUYA SKY 登頂", desc: "澀谷 Scramble Square 14F 欣賞最美夕陽與夜景。<br><strong class='text-red-500'>* 需提前2-3個月搶票！</strong>", tag: "必搶票" },
+              { time: "19:00", title: "返回旅館 Check-in", desc: "返回曳舟旅館辦理 Check-in、整理房間。不累的話推薦可去<strong>押上 LIFE 超市（營業至24:00）</strong>大採購水蜜桃與宵夜！", tag: "夜貓備案" }
+            ]
+          },
+          {
+            dayNum: "2",
+            date: "7/20",
+            week: "週一",
+            fullDate: "2026.07.20 (Mon)",
+            theme: "三麗鷗彩虹樂園 × 新宿不夜城",
+            meals: { breakfast: "超商美味早餐", lunch: "樂園主題餐廳", dinner: "新宿敘敘苑燒肉" },
+            timeline: [
+              { time: "08:30", title: "出發多摩中心站", desc: "由曳舟/押上出發搭地鐵至新宿，轉乘 <strong>京王線</strong> 直達「京王多摩中心站」。" },
+              { time: "10:00", title: "三麗鷗彩虹樂園", desc: "全室內冷氣開放，開心地與 Kitty 拍照。排在週一平日人潮最少、票價更划算！" },
+              { time: "17:00", title: "傍晚直奔新宿商圈", desc: "搭京王線特急直達新宿。前往新宿高島屋或伊勢丹百貨血拼 LV 戰利品（若表參道有買此處可當備案）。" },
+              { time: "18:30", title: "Disney Store 新宿旗艦店", desc: "日本最大級旗艦店！可先在這裡採購好隔天去迪士尼的配飾與周邊。" },
+              { time: "21:00", title: "唐吉訶德 新宿東口店", desc: "24小時營業。提前進行加熱菸與藥妝第一次大補貨，讓之後的行程更輕鬆！" }
+            ]
+          },
+          {
+            dayNum: "3",
+            date: "7/21",
+            week: "週二",
+            fullDate: "2026.07.21 (Tue)",
+            theme: "紅色狂熱：東京迪士尼樂園 (Land)",
+            meals: { breakfast: "晴空塔超商/麵包", lunch: "樂園紅心女王餐廳", dinner: "晴空塔利久牛舌" },
+            timeline: [
+              { time: "07:00", title: "晴空塔巴士站排隊", desc: "前往晴空塔城1樓巴士轉運站（東庭院 1F）現場排隊搭乘「直達巴士」，避開地鐵大迷宮轉車！" },
+              { time: "07:30", title: "搭乘直達巴士出發", desc: "刷 Suica 上車，車程約 45-55 分鐘直奔迪士尼樂園。" },
+              { time: "08:30", title: "迪士尼樂園 (Disneyland) 全日", desc: "暢玩美女與野獸、太空山，盡情欣賞日間與夜間大遊行！" },
+              { time: "21:30", title: "搭直達巴士返回晴空塔", desc: "玩累了直接在樂園巴士站上車，一路睡回晴空塔站，走回曳舟旅館休息。" }
+            ]
+          },
+          {
+            dayNum: "4",
+            date: "7/22",
+            week: "週三",
+            fullDate: "2026.07.22 (Wed)",
+            theme: "淺草御守攻略 × 上野取鏡 × 秋葉原",
+            meals: { breakfast: "淺草天國珈琲", lunch: "上野肉の大山炸牛排", dinner: "上野大統領居酒屋" },
+            timeline: [
+              { time: "09:30", title: "淺草寺與雷門巡禮", desc: "悠閒散步大買特買：淺草寺桃形守、今戶神社招財貓黑御守、吉備子屋桃鈴。" },
+              { time: "12:00", title: "上野阿美橫町與唐吉補貨", desc: "搭一站地鐵至上野。在唐吉訶德補貨加熱菸，並享用「肉の大山」炸牛排配啤酒！" },
+              { time: "15:00", title: "眼鏡市場・提前取鏡", desc: "進度 Day 4！至眼鏡市場確認眼鏡完工並<strong>提前取鏡</strong>。今天拿好，明天玩海洋最省心！", tag: "重要任務" },
+              { time: "16:30", title: "秋葉原動漫巡禮", desc: "順路漫步至隔壁的秋葉原，進行動漫與電器街大樓初探。" },
+              { time: "18:00", title: "大統領居酒屋 晚餐", desc: "阿美橫町老字號昭和風居酒屋，大啖烤串與燉牛雜配冰啤酒，體驗道地東京夜晚！" }
+            ]
+          },
+          {
+            dayNum: "5",
+            date: "7/23",
+            week: "週四",
+            fullDate: "2026.07.23 (Thu)",
+            theme: "藍色浪漫：東京迪士尼海洋 (Sea)",
+            meals: { breakfast: "能量補給輕食", lunch: "夢幻泉鄉皇家宴會廳", dinner: "宇奈とと平價鰻魚飯" },
+            timeline: [
+              { time: "07:00", title: "晴空塔巴士站出發", desc: "同樣在晴空塔巴士站搭乘直達巴士，輕鬆省力直奔迪士尼海洋。" },
+              { time: "07:30", title: "搭乘直達巴士出發", desc: "刷 Suica 上車，一路上車補眠，大約 50 分鐘內抵達樂園。" },
+              { time: "08:30", title: "迪士尼海洋 (DisneySea) 全日", desc: "狂衝全新開幕的超熱門園區「夢幻泉鄉 Fantasy Springs」（記得提早搶SP或DPA入場券）！" },
+              { time: "21:30", title: "搭直達巴士返回晴空塔", desc: "返抵晴空塔後，可享用平價鰻魚飯補充滿滿元氣。" }
+            ]
+          },
+          {
+            dayNum: "6",
+            date: "7/24",
+            week: "週五",
+            fullDate: "2026.07.24 (Fri)",
+            theme: "表參道 LV 採購 × 黑色御守 × 東京鐵塔",
+            meals: { breakfast: "Bills表參道鬆餅", lunch: "AFURI柚子鹽拉麵", dinner: "新橋炸牛元村" },
+            timeline: [
+              { time: "09:30", title: "原宿與表參道潮流採購", desc: "逛 Sanrio 原宿旗艦店（買限定款），並在表參道 <strong>Louis Vuitton (LV)</strong> 進行採購（必帶護照辦理退稅）。" },
+              { time: "12:30", title: "地鐵銀座線直達新橋", desc: "從表參道免轉車一線直達新橋。步行 2 分鐘到<strong>烏森神社</strong>購入罕見的黑色「癌封じ」御守（請在15:30前抵達）。" },
+              { time: "15:00", title: "東京鐵塔地標美照", desc: "前往東京鐵塔與經典地標合照、欣賞最美日落夜景。" },
+              { time: "20:00", title: "回旅館收拾行李", desc: "返回曳舟旅館，收拾整理好全部大行李，迎接明天的大撤離。" }
+            ]
+          },
+          {
+            dayNum: "7",
+            date: "7/25",
+            week: "週六",
+            fullDate: "2026.07.25 (Sat)",
+            theme: "築地海鮮 ➔ 銀座補貨 ➔ 撤離管制區 ➔ 返台",
+            meals: { breakfast: "築地狐狸屋/生蠔", lunch: "銀座煉瓦亭蛋包飯", dinner: "飛機餐或機場拉麵" },
+            timeline: [
+              { time: "08:00", title: "築地場外市場早餐", desc: "大啖狐狸屋牛丼、玉子燒與現烤鮮美生蠔。" },
+              { time: "10:00", title: "銀座 LV 與百貨最後補貨", desc: "進行回國前的最後精品與藥妝補稅掃貨。" },
+              { time: "11:30", title: "⚡ 急！回旅館撤離大行李", desc: "<strong>今天下午 15:00 起，曳舟周邊因隅田川煙火大會全面交通管制。</strong> 必須中午前將行李拉到「京成上野站」寄放，切勿遲疑！", tag: "極重要" },
+              { time: "13:00", title: "上野阿美橫町最後補貨", desc: "在京成上野站放好行李後，在上野作伴手禮零食、藥妝的最後大追加。" },
+              { time: "16:00", title: "搭乘 Skyliner 直奔機場", desc: "從上野搭乘 Skyliner（車程41分）優雅前往成田機場。" },
+              { time: "18:00", title: "成田機場辦理登機", desc: "辦理登機。再次確認：未抽完的加熱菸與機器在登機前皆需在日本處理掉，切勿帶回台灣。" }
+            ]
+          }
+        ]);
+
+        const currentDay = computed(() => itinerary.value[activeDay.value]);
+
+        return {
+          activeDay,
+          isOpen,
+          toggleSection,
+          itinerary,
+          currentDay
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
