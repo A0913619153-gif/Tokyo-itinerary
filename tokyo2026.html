@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>東京 7 天 6 夜自由行 2026</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Vue 3 CDN -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -39,6 +42,7 @@
 
   <div id="app" class="max-w-md mx-auto bg-white shadow-xl min-h-screen flex flex-col relative">
     
+    <!-- Header 頂部資訊 -->
     <header class="bg-gradient-to-r from-aquagreen-500 to-aquagreen-600 text-white p-6 rounded-b-[2rem] shadow-md">
       <div class="flex justify-between items-start">
         <div>
@@ -57,8 +61,10 @@
       </div>
     </header>
 
+    <!-- 主內容區 -->
     <main class="p-4 flex-1 space-y-4">
       
+      <!-- 卡片 1: 票券攻略 -->
       <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('tickets')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
           <span>🎟️ 出差前必買票券 & 任務</span>
@@ -75,6 +81,7 @@
         </div>
       </div>
 
+      <!-- 卡片 2: 御守與配鏡與限定御守攻略 -->
       <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('omamori')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
           <span>⛩️ 專屬御守、限定籤文與配鏡追蹤</span>
@@ -82,6 +89,7 @@
         </button>
         <div v-show="isOpen.omamori" class="p-4 text-xs space-y-4 text-slate-600 border-t border-aquagreen-100">
           
+          <!-- 配鏡進度 -->
           <div>
             <span class="font-bold text-slate-700 block mb-1">👓 配鏡時程（日本眼鏡市場）</span>
             <ul class="list-disc list-inside space-y-0.5 text-slate-500">
@@ -92,10 +100,12 @@
           
           <hr class="border-slate-100">
           
+          <!-- 御守清單與建議天數 -->
           <div>
             <span class="font-bold text-slate-700 block mb-2">📍 精選御守與限定籤文採購攻略</span>
             <div class="space-y-3">
               
+              <!-- 淺草區域 (Day 4) -->
               <div class="bg-slate-50 p-3 rounded-xl border-l-4 border-aquagreen-400">
                 <div class="flex justify-between items-center mb-1.5">
                   <span class="font-bold text-aquagreen-700 text-xs">🏮 淺草行程區</span>
@@ -114,6 +124,7 @@
                 </div>
               </div>
 
+              <!-- 新橋/銀座區域 (Day 6/Day 7) -->
               <div class="bg-slate-50 p-3 rounded-xl border-l-4 border-amber-400">
                 <div class="flex justify-between items-center mb-1.5">
                   <span class="font-bold text-amber-700 text-xs">🏢 新橋/銀座行程區</span>
@@ -129,6 +140,7 @@
                 </div>
               </div>
 
+              <!-- 夢幻限定備選 (Day 4/彈性) -->
               <div class="bg-slate-50 p-3 rounded-xl border-l-4 border-pink-400">
                 <div class="flex justify-between items-center mb-1.5">
                   <span class="font-bold text-pink-700 text-xs">🌸 夢幻限定備選</span>
@@ -136,7 +148,7 @@
                 </div>
                 <div class="text-[11px]">
                   <p><strong>🌸 月替限定御守（根津神社）</strong><br>
-                    <span class="text-slate-500">7 月限定為「蓮花設計」，每月 1 日限量 100 個。需早起排隊但收藏價值極高！</span>
+                    <span class="text-slate-500">7 月限定為「蓮花設計」，每月 1 日限量 100 個。需早起排隊 but 收藏價值極高！</span>
                   </p>
                 </div>
               </div>
@@ -146,6 +158,7 @@
         </div>
       </div>
 
+      <!-- App風：橫向滑動日期選擇列 -->
       <div class="py-1">
         <h3 class="text-xs font-bold text-slate-400 mb-2 px-1 uppercase tracking-wider">選擇行程日期</h3>
         <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-2 px-1 snap-x">
@@ -163,11 +176,13 @@
         </div>
       </div>
 
+      <!-- 當日地圖導航按鈕 -->
       <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-2xl p-4 shadow-md flex items-center justify-between">
         <div class="space-y-1">
-          <span class="text-[10px] bg-aquagreen-500 text-white px-2 py-0.5 rounded-full font-bold">Google Maps 軌跡</span>
-          <h4 class="text-xs font-bold">開啟 Day {{ currentDay.dayNum }} 路線軌跡地圖</h4>
-          <p class="text-[10px] text-slate-400">一鍵在手機地圖中自動排好今日景點</p>
+          <span class="text-[10px] bg-aquagreen-500 text-white px-2 py-0.5 rounded-full font-bold">Google Maps 交通工具</span>
+          <h4 class="text-xs font-bold">開啟 Day {{ currentDay.dayNum }} 路線導航</h4>
+          <p class="text-[10px] text-slate-400" v-if="currentDay.mapType === 'metro'">💡 開啟後建議切換至「大眾運輸 🚇」模式</p>
+          <p class="text-[10px] text-slate-400" v-else>🚌 晴空塔直達巴士 ➔ 迪士尼專屬路線</p>
         </div>
         <a 
           :href="currentDay.mapUrl" 
@@ -178,8 +193,10 @@
         </a>
       </div>
 
+      <!-- 每日行程卡片 -->
       <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-4">
         
+        <!-- 當日主題 -->
         <div class="border-b border-slate-100 pb-3">
           <div class="flex items-center space-x-2">
             <span class="bg-aquagreen-100 text-aquagreen-700 text-xs font-bold px-2.5 py-1 rounded-full">Day {{ currentDay.dayNum }}</span>
@@ -188,6 +205,7 @@
           <h2 class="text-lg font-bold text-slate-800 mt-1">{{ currentDay.theme }}</h2>
         </div>
 
+        <!-- 每日時間軸 (Timeline) -->
         <div class="space-y-4 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-slate-100">
           <div v-for="(item, idx) in currentDay.timeline" :key="idx" class="flex space-x-4 relative items-start">
             <div class="w-7 h-7 flex-shrink-0 rounded-full bg-white border-2 border-aquagreen-500 flex items-center justify-center z-10 text-[10px] text-aquagreen-600 font-bold">
@@ -204,6 +222,7 @@
           </div>
         </div>
 
+        <!-- 推薦餐飲 -->
         <div class="border-t border-slate-100 pt-4 space-y-2">
           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">🍴 推薦餐飲清單</h3>
           <div class="grid grid-cols-3 gap-2">
@@ -250,8 +269,9 @@
             week: "週日",
             fullDate: "2026.07.19 (Sun)",
             theme: "成田入境 × 澀谷配鏡與夜景",
-            // 點擊直飛 Google 路線規劃：成田機場 -> 曳舟(旅館) -> 澀谷(配鏡/SHIBUYA SKY) -> 曳舟
-            mapUrl: "https://www.google.com/maps/dir/%E6%88%90%E7%94%B0%E5%9B%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4/%E6%9B%B3%E8%88%9F%E8%BB%8A%E7%AB%99/%E6%BE%80%E8%B0%B7%E8%BB%8A%E7%AB%99/SHIBUYA+SKY",
+            mapType: "metro",
+            // 地鐵軌跡：成田機場第一航廈站 -> 曳舟站 -> 澀谷站 -> 曳舟站
+            mapUrl: "https://www.google.com/maps/dir/%E6%88%90%E7%94%B0%E7%AC%AC%EF%BC%91%E5%85%AC%E9%9B%85%E7%89%B9%E8%A8%B1%E9%A7%90%E8%BB%8A%E5%A0%B4/%E6%9B%B3%E8%88%9F%E9%A7%85/%E6%BE%80%E8%B0%B7%E9%A7%85/%E6%9B%B3%E8%88%9F%E9%A7%85",
             meals: { breakfast: "機場輕食", lunch: "澀谷星乃珈琲", dinner: "晴空塔六厘舍沾麵" },
             timeline: [
               { time: "11:15", title: "抵達成田機場", desc: "入境後購買限定設計款 Suica。" },
@@ -268,8 +288,9 @@
             week: "週一",
             fullDate: "2026.07.20 (Mon)",
             theme: "三麗鷗彩虹樂園 × 新宿不夜城",
-            // 曳舟 -> 三麗鷗彩虹樂園 -> 新宿
-            mapUrl: "https://www.google.com/maps/dir/%E6%9B%B3%E8%88%9F%E8%BB%8A%E7%AB%99/%E4%B8%89%E9%BA%97%E9%bindings%A5%E5%BD%A9%E8%99%B9%E6%A8%82%E5%9C%92/%E6%96%B0%E5%AE%BF%E8%BB%8A%E7%AB%99",
+            mapType: "metro",
+            // 地鐵軌跡：曳舟站 -> 多摩中心站 -> 新宿站 -> 曳舟站
+            mapUrl: "https://www.google.com/maps/dir/%E6%9B%B3%E8%88%9F%E9%A7%85/%E5%A4%9A%E6%91%A9%E4%B8%AD%E5%BF%83%E9%A7%85/%E6%96%B0%E5%AE%BF%E9%A7%85/%E6%9B%B3%E8%88%9F%E9%A7%85",
             meals: { breakfast: "超商美味早餐", lunch: "樂園主題餐廳", dinner: "新宿敘敘苑燒肉" },
             timeline: [
               { time: "08:30", title: "出發多摩中心站", desc: "由曳舟出發搭地鐵至新宿，轉乘京王線直達多摩中心站。" },
@@ -285,8 +306,9 @@
             week: "週二",
             fullDate: "2026.07.21 (Tue)",
             theme: "紅色狂熱：東京迪士尼樂園 (Land)",
-            // 晴空塔巴士站 -> 東京迪士尼樂園
-            mapUrl: "https://www.google.com/maps/dir/%E6%9D%B1%E4%BA%AC%E6%99%B4%E7%A9%BA%E5%A1%94/%E6%9D%B1%E4%BA%AC%E8%BF%AA%E5%A3%AB%E5%B0%BC%E6%A8%82%E5%9C%92",
+            mapType: "bus",
+            // 巴士直達軌跡：東京晴空塔 巴士轉運站 -> 東京迪士尼樂園
+            mapUrl: "https://www.google.com/maps/dir/%E6%9D%B1%E4%BA%AC%E6%99%B4%E7%A9%BA%E5%A1%94+%E5%B7%B4%E5%A3%AB%E8%BD%89%E9%81%8B%E7%AB%99/%E6%9D%B1%E4%BA%AC%E8%BF%AA%E5%A3%AB%E5%B0%BC%E6%A8%82%E5%9C%92",
             meals: { breakfast: "晴空塔超商/麵包", lunch: "樂園紅心女王餐廳", dinner: "晴空塔利久牛舌" },
             timeline: [
               { time: "07:00", title: "晴空塔巴士站排隊", desc: "前往晴空塔城1樓巴士轉運站現場排隊搭乘「直達巴士」。" },
@@ -301,8 +323,9 @@
             week: "週三",
             fullDate: "2026.07.22 (Wed)",
             theme: "淺草御守攻略 × 上野取鏡 × 秋葉原",
-            // 淺草寺 -> 今戶神社 -> 上野阿美橫町 -> 秋葉原
-            mapUrl: "https://www.google.com/maps/dir/%E6%B7%BA%E8%8D%89%E5%AF%BA/%E4%BB%8A%E6%88%B6%E7%A5%9E%E7%A4%BE/%E4%B8%8A%E9%8F%8E%E9%98%BF%E7%BE%8E%E6%A9%AB%E7%94%BA/%E7%A7%8B%E8%91%89%E5%8E%9F",
+            mapType: "metro",
+            // 地鐵軌跡：曳舟站 -> 淺草站 -> 上野站 -> 秋葉原站 -> 曳舟站
+            mapUrl: "https://www.google.com/maps/dir/%E6%9B%B3%E8%88%9F%E9%A7%85/%E6%B7%BA%E8%8D%89%E9%A7%85/%E4%B8%8E%E9%87%8E%E9%A7%85/%E7%A7%8B%E8%91%89%E5%8E%9F%E9%A7%85/%E6%9B%B3%E8%88%9F%E9%A7%85",
             meals: { breakfast: "淺草天國珈琲", lunch: "上野肉の大山炸牛排", dinner: "上野大統領居酒屋" },
             timeline: [
               { time: "09:30", title: "淺草寺與雷門巡禮", desc: "採購：淺草寺桃形守、今戶神社招財貓黑御守（Day 4 衝）、吉備子屋桃鈴。" },
@@ -318,8 +341,9 @@
             week: "週四",
             fullDate: "2026.07.23 (Thu)",
             theme: "藍色浪漫：東京迪士尼海洋 (Sea)",
-            // 晴空塔巴士站 -> 東京迪士尼海洋
-            mapUrl: "https://www.google.com/maps/dir/%E6%9D%B1%E4%BA%AC%E6%99%B4%E7%A9%BA%E5%A1%94/%E6%9D%B1%E4%BA%AC%E8%BF%AA%E5%A3%AB%E5%B0%BC%E6%B5%B7%E6%B4%8B",
+            mapType: "bus",
+            // 巴士直達軌跡：東京晴空塔 巴士轉運站 -> 東京迪士尼海洋
+            mapUrl: "https://www.google.com/maps/dir/%E6%9D%B1%E4%BA%AC%E6%99%B4%E7%A9%BA%E5%A1%94+%E5%B7%B4%E5%A3%AB%E8%BD%89%E9%81%8B%E7%AB%99/%E6%9D%B1%E4%BA%AC%E8%BF%AA%E5%A3%AB%E5%B0%BC%E6%B5%B7%E6%B4%8B",
             meals: { breakfast: "能量補給輕食", lunch: "夢幻泉鄉皇家宴會廳", dinner: "宇奈とと平價鰻魚飯" },
             timeline: [
               { time: "07:00", title: "晴空塔巴士站出發", desc: "在晴空塔巴士站搭乘直達巴士，輕鬆省力直奔迪士尼海洋。" },
@@ -334,8 +358,9 @@
             week: "週五",
             fullDate: "2026.07.24 (Fri)",
             theme: "表參道 LV 採購 × 黑色御守 × 東京鐵塔",
-            // 表參道 -> 烏森神社 -> 東京鐵塔
-            mapUrl: "https://www.google.com/maps/dir/%E8%A1%A8%E5%8F%83%E9%81%93/%E7%83%8F%E6%A3%AE%E7%A5%9E%E7%A4%BE/%E6%9D%B1%E4%BA%AC%E9%90%B5%E5%A1%94",
+            mapType: "metro",
+            // 地鐵軌跡：曳舟站 -> 表參道站 -> 新橋站 -> 赤羽橋站(東京鐵塔) -> 曳舟站
+            mapUrl: "https://www.google.com/maps/dir/%E6%9B%B3%E8%88%9F%E9%A7%85/%E8%A1%A8%E5%8F%83%E9%81%93%E9%A7%85/%E6%96%B0%E6%A9%8B%E9%A7%85/%E8%B5%A4%E7%BE%BD%E6%A9%8B%E9%A7%85/%E6%9B%B3%E8%88%9F%E9%A7%85",
             meals: { breakfast: "Bills表參道鬆餅", lunch: "AFURI柚子鹽拉麵", dinner: "新橋炸牛元村" },
             timeline: [
               { time: "09:30", title: "原宿與表參道潮流採購", desc: "逛 Sanrio 表參道，並在 <strong>Louis Vuitton (LV)</strong> 進行採購辦理退稅。" },
@@ -350,11 +375,12 @@
             week: "週六",
             fullDate: "2026.07.25 (Sat)",
             theme: "築地海鮮 ➔ 銀座補貨 ➔ 撤離管制區 ➔ 返台",
-            // 築地場外市場 -> 銀座 -> 曳舟(拿行李) -> 京成上野站 -> 成田機場
-            mapUrl: "https://www.google.com/maps/dir/%E7%AF%89%E5%9C%B0%E5%A0%B4%E5%A4%96%E5%B8%82%E5%A0%B4/%E9%8B%80%E5%BA%A7/%E6%9B%B3%E8%88%9F%E8%BB%8A%E7%AB%99/%E4%BA%AC%E6%88%90%E4%B8%8A%E9%8F%8E%E8%BB%8A%E7%AB%99/%E6%88%90%E7%94%B0%E5%9B%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4",
+            mapType: "metro",
+            // 地鐵軌跡：築地站 -> 銀座站 -> 曳舟站(拿行李) -> 京成上野站 -> 成田機場第一航廈站
+            mapUrl: "https://www.google.com/maps/dir/%E7%AF%89%E5%9C%B0%E9%A7%85/%E9%8B%80%E5%BA%A7%E9%A7%85/%E6%9B%B3%E8%88%9F%E9%A7%85/%E4%BA%AC%E6%88%90%E4%B8%8A%E9%8F%8E%E9%A7%85/%E6%88%90%E7%94%B0%E7%AC%AC%EF%BC%91%E5%85%AC%E9%9B%85%E7%89%B9%E8%A8%B1%E9%A7%90%E8%BB%8A%E5%A0%B4",
             meals: { breakfast: "築地狐狸屋/生蠔", lunch: "銀座煉瓦亭蛋包飯", dinner: "飛機餐或機場拉麵" },
             timeline: [
-              { time: "08:00", title: "築地場外市場早餐", desc: "大啖狐狸屋牛丼、玉子燒與現烤鮮美生蠔。" },
+              { time: "08:00", title: "築地場外市場早餐", desc: "大啖狐狸屋牛丼、玉子裝與現烤鮮美生蠔。" },
               { time: "10:00", title: "銀座 LV 與百貨最後補貨", desc: "進行回國前的最後精品與藥妝補稅掃貨。順路可在附近烏森神社進行心願色籤與御朱印補缺！" },
               { time: "11:30", title: "⚡ 急！回旅館撤離大行李", desc: "<strong>下午 15:00 起，曳舟周邊因隅田川煙火大會大管制。</strong> 必須中午前將行李拉到「京成上野站」寄放！", tag: "極重要" },
               { time: "13:00", title: "上野阿美橫町最後補貨", desc: "在上野作伴手禮零食、藥妝的最後大追加。" },
