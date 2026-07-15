@@ -1,221 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>東京 7 天 6 夜自由行 2026</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Vue 3 CDN -->
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <!-- Google Fonts (Noto Sans TC) -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- Leaflet 地圖 CSS 與 JS (免費地圖套件) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            aquagreen: {
-              50: '#f0fdfa',
-              100: '#ccfbf1',
-              200: '#99f6e4',
-              300: '#5eead4',
-              400: '#2dd4bf',
-              500: '#14b8a6',
-              600: '#0d9488',
-              700: '#0f766e',
-            }
-          },
-          fontFamily: {
-            sans: ['Noto Sans TC', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    /* 地圖專用圓角樣式 */
-    #map { height: 260px; width: 100%; z-index: 10; }
-  </style>
-</head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen pb-12">
-
-  <div id="app" class="max-w-md mx-auto bg-white shadow-xl min-h-screen flex flex-col relative">
-    
-    <!-- Header 頂部資訊 -->
-    <header class="bg-gradient-to-r from-aquagreen-500 to-aquagreen-600 text-white p-6 rounded-b-[2rem] shadow-md">
-      <div class="flex justify-between items-start">
-        <div>
-          <span class="bg-aquagreen-700 bg-opacity-40 text-xs px-3 py-1 rounded-full font-medium">Tokyo Adventure 2026</span>
-          <h1 class="text-2xl font-bold mt-2">東京 7 天 6 夜自由行</h1>
-          <p class="text-xs text-aquagreen-100 mt-1">2026.07.19 – 07.25 | 喬宇 & 芝穎</p>
-        </div>
-        <div class="text-right">
-          <span class="text-xs block text-aquagreen-100">預估氣溫</span>
-          <span class="text-lg font-bold">32-36°C ☀️</span>
-        </div>
-      </div>
-      
-      <div class="mt-4 bg-white bg-opacity-15 p-3 rounded-xl text-xs text-aquagreen-50">
-        📌 <strong>夏祭特別注意：</strong> 7/25 隅田川煙火大會！下午 15:00 起大範圍管制。中午前務必將行李拉到上野！
-      </div>
-    </header>
-
-    <!-- 摺疊功能清單區 -->
-    <main class="p-4 flex-1 space-y-3">
-      
-      <!-- 卡片 1: 必備票券 -->
-      <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
-        <button @click="toggleSection('tickets')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
-          <span>🎟️ 出發前必買票券 & 任務</span>
-          <span class="text-xs">{{ isOpen.tickets ? '▲ 收起' : '▼ 展開' }}</span>
-        </button>
-        <div v-show="isOpen.tickets" class="p-4 text-xs space-y-2 text-slate-600 border-t border-aquagreen-100">
-          <ul class="list-disc list-inside space-y-1.5">
-            <li><strong>迪士尼雙樂園門票：</strong>請提早 2 個月於官網搶購（Land & Sea）。</li>
-            <li><strong>三麗鷗彩虹樂園門票：</strong>7 月為旺季，建議提早於官網/平台購票。</li>
-            <li><strong>SHIBUYA SKY 門票：</strong>出發前 2-3 個月務必搶到 7/19 16:40 的夕陽場。</li>
-            <li><strong>限定版 Suica 卡：</strong>抵達機場後前往 JR 東日本服務中心詢問購買。</li>
-            <li><strong>加熱菸注意事項：</strong>僅限日本境內使用，機器與菸彈切勿帶回台灣（違法）。</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 卡片 2: 御守與配鏡 -->
-      <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
-        <button @click="toggleSection('omamori')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
-          <span>⛩️ 專屬御守與配鏡追蹤</span>
-          <span class="text-xs">{{ isOpen.omamori ? '▲ 收起' : '▼ 展開' }}</span>
-        </button>
-        <div v-show="isOpen.omamori" class="p-4 text-xs space-y-3 text-slate-600 border-t border-aquagreen-100">
-          <div>
-            <span class="font-bold text-slate-700 block mb-1">👓 配鏡時程（日本眼鏡市場）</span>
-            <ul class="list-disc list-inside space-y-0.5 text-slate-500">
-              <li><strong>Day 1 (7/19)：</strong> 澀谷店/上野店送件</li>
-              <li><strong>Day 4 (7/22)：</strong> 確認完工 ➔ <strong>今天順路提前取鏡！</strong></li>
-            </ul>
-          </div>
-          <hr class="border-slate-100">
-          <div>
-            <span class="font-bold text-slate-700 block mb-1.5">📍 御守採購清單</span>
-            <div class="grid grid-cols-2 gap-2">
-              <div class="bg-slate-50 p-2 rounded-lg">
-                <span class="font-bold text-aquagreen-700 block">淺草寺</span>
-                <span>桃形御守（保平安、開運）</span>
-              </div>
-              <div class="bg-slate-50 p-2 rounded-lg">
-                <span class="font-bold text-aquagreen-700 block">今戶神社</span>
-                <span>招財貓（黑色限定款）</span>
-              </div>
-              <div class="bg-slate-50 p-2 rounded-lg">
-                <span class="font-bold text-aquagreen-700 block">吉備子屋</span>
-                <span>特色桃鈴（開運避邪）</span>
-              </div>
-              <div class="bg-slate-50 p-2 rounded-lg">
-                <span class="font-bold text-aquagreen-700 block">烏森神社</span>
-                <span>黑色御守（癌封じ，新橋站）</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- App風：橫向滑動日期選擇列 -->
-      <div class="py-2">
-        <h3 class="text-sm font-bold text-slate-500 mb-2 px-1">選擇行程日期（地圖自動切換）</h3>
-        <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-2 px-1 snap-x">
-          <button 
-            v-for="(day, index) in itinerary" 
-            :key="index"
-            @click="changeDay(index)"
-            class="flex-shrink-0 w-20 py-3 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 snap-center shadow-sm"
-            :class="activeDay === index ? 'bg-aquagreen-500 text-white font-bold scale-105 shadow-aquagreen-200' : 'bg-white border border-slate-200 text-slate-500'"
-          >
-            <span class="text-[10px] uppercase opacity-80">Day {{ day.dayNum }}</span>
-            <span class="text-sm my-0.5">{{ day.date }}</span>
-            <span class="text-[10px] opacity-90">{{ day.week }}</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 🗺️ 新增：互動式地圖軌跡區塊 -->
-      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-        <div class="p-4 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
-          <span class="text-xs font-bold text-slate-700 flex items-center gap-1">📍 Day {{ currentDay.dayNum }} 行動軌跡地圖</span>
-          <span class="text-[10px] bg-aquagreen-100 text-aquagreen-700 px-2 py-0.5 rounded-full">互動式地圖</span>
-        </div>
-        <div id="map" class="relative"></div>
-      </div>
-
-      <!-- 每日行程卡片 -->
-      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-4">
-        
-        <!-- 當日主題 -->
-        <div class="border-b border-slate-100 pb-3">
-          <div class="flex items-center space-x-2">
-            <span class="bg-aquagreen-100 text-aquagreen-700 text-xs font-bold px-2.5 py-1 rounded-full">Day {{ currentDay.dayNum }}</span>
-            <span class="text-xs text-slate-400 font-medium">{{ currentDay.fullDate }}</span>
-          </div>
-          <h2 class="text-lg font-bold text-slate-800 mt-1">{{ currentDay.theme }}</h2>
-        </div>
-
-        <!-- 每日時間軸 (Timeline) -->
-        <div class="space-y-4 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-slate-100 before:pointer-events-none">
-          <div v-for="(item, idx) in currentDay.timeline" :key="idx" class="flex space-x-4 relative items-start">
-            <!-- 時間軸圓點 -->
-            <div class="w-7 h-7 flex-shrink-0 rounded-full bg-aquagreen-50 border-2 border-aquagreen-500 flex items-center justify-center z-10 text-[10px] text-aquagreen-600 font-bold bg-white">
-              {{ idx + 1 }}
-            </div>
-            <!-- 行程內容 -->
-            <div class="flex-1 bg-slate-50 p-3 rounded-xl">
-              <div class="flex justify-between items-baseline mb-1">
-                <span class="text-xs font-bold text-aquagreen-600">{{ item.time }}</span>
-                <span v-if="item.tag" class="text-[9px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded font-bold">{{ item.tag }}</span>
-              </div>
-              <h4 class="text-xs font-bold text-slate-800" v-html="item.title"></h4>
-              <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed" v-html="item.desc"></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 當日美食卡片 -->
-        <div class="border-t border-slate-100 pt-4 space-y-2">
-          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">🍴 推薦餐飲清單</h3>
-          <div class="grid grid-cols-3 gap-2">
-            <div class="bg-orange-50 p-2.5 rounded-xl text-center">
-              <span class="text-[9px] text-orange-600 font-bold block">🍳 早餐</span>
-              <p class="text-[10px] font-bold text-slate-700 mt-1 truncate" :title="currentDay.meals.breakfast">{{ currentDay.meals.breakfast }}</p>
-            </div>
-            <div class="bg-orange-50 p-2.5 rounded-xl text-center">
-              <span class="text-[9px] text-orange-600 font-bold block">🍱 午餐</span>
-              <p class="text-[10px] font-bold text-slate-700 mt-1 truncate" :title="currentDay.meals.lunch">{{ currentDay.meals.lunch }}</p>
-            </div>
-            <div class="bg-orange-50 p-2.5 rounded-xl text-center">
-              <span class="text-[9px] text-orange-600 font-bold block">🍺 晚餐</span>
-              <p class="text-[10px] font-bold text-slate-700 mt-1 truncate" :title="currentDay.meals.dinner">{{ currentDay.meals.dinner }}</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </main>
-
-    <!-- Footer 底部作者資訊 -->
-    <footer class="py-4 text-center border-t border-slate-100 text-[10px] text-slate-400">
-      Made with 💚 for 喬宇 & 芝穎's Tokyo Adventure 2026
-    </footer>
-  </div>
-
-  <script>
-    const { createApp, ref, computed, onMounted } = Vue;
+    const { createApp, ref, computed, onMounted, nextTick } = Vue;
 
     createApp({
       setup() {
@@ -236,7 +20,6 @@
             fullDate: "2026.07.19 (Sun)",
             theme: "成田入境 × 澀谷配鏡與夜景",
             meals: { breakfast: "機場輕食", lunch: "澀谷星乃珈琲", dinner: "晴空塔六厘舍沾麵" },
-            // 地圖點座標
             mapPoints: [
               { name: "1. 成田機場", lat: 35.7720, lng: 140.3929 },
               { name: "2. 曳舟旅館 (寄放行李)", lat: 35.7188, lng: 139.8184 },
@@ -382,15 +165,19 @@
 
         const currentDay = computed(() => itinerary.value[activeDay.value]);
 
-        // 初始化地圖
+        // 初始化地圖 (延遲以確保 DOM 完全渲染)
         const initMap = () => {
-          map = L.map('map').setView([35.6895, 139.6917], 10);
-          
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-          }).addTo(map);
+          setTimeout(() => {
+            map = L.map('map').setView([35.6895, 139.6917], 10);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '© OpenStreetMap'
+            }).addTo(map);
 
-          updateMapRoute();
+            // 強制地圖重新計算大小，防止顯示不全
+            map.invalidateSize();
+            updateMapRoute();
+          }, 100);
         };
 
         // 更新地圖標記和連線
@@ -410,24 +197,28 @@
             const latlng = [pt.lat, pt.lng];
             latlngs.push(latlng);
 
-            // 1. 建立地標標記
+            // 建立地標標記
             const marker = L.marker(latlng).addTo(map);
-            marker.bindPopup(`<b>${pt.name}</b>`).openPopup();
+            marker.bindPopup(`<b>${pt.name}</b>`);
+            // 第一個點預設開啟泡泡
+            if (index === 0) {
+              marker.openPopup();
+            }
             mapLayers.push(marker);
           });
 
-          // 2. 建立連線軌跡
+          // 建立虛線軌跡
           const polyline = L.polyline(latlngs, {
             color: '#0d9488', // 墨綠色軌跡
             weight: 3,
             opacity: 0.8,
-            dashArray: '6, 6' // 虛線效果
+            dashArray: '6, 6'
           }).addTo(map);
           mapLayers.push(polyline);
 
-          // 3. 自動縮放/移動地圖到適合顯示所有點的範圍
+          // 自動縮放至合適範圍
           const bounds = L.latLngBounds(latlngs);
-          map.fitBounds(bounds, { padding: [30, 30] });
+          map.fitBounds(bounds, { padding: [40, 40] });
         };
 
         const changeDay = (index) => {
@@ -450,5 +241,3 @@
       }
     }).mount('#app');
   </script>
-</body>
-</html>
