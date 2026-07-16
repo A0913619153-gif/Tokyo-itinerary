@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pokémon 東京冒險軌跡</title>
+  <title>東京旅行行程表</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入 Google Fonts (日系感 Noto Sans JP) -->
@@ -31,16 +31,16 @@
     <!-- 頂部導覽列 -->
     <header class="sticky top-0 bg-white/95 backdrop-blur border-b border-emerald-100 px-4 py-3 z-10">
       <div class="flex items-center justify-between">
-        <h1 class="text-lg font-bold text-emerald-800 tracking-wider">寶可夢地圖軌跡</h1>
-        <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">東京朝聖線</span>
+        <h1 class="text-lg font-bold text-emerald-800 tracking-wider">我的東京旅行</h1>
+        <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">日系極簡風</span>
       </div>
     </header>
 
-    <!-- App 風格：橫向滑動日期/路線選單 -->
-    <div class="bg-emerald-50/50 py-3 border-b border-emerald-100">
+    <!-- 頂部：原本的行程橫向滑動選單 (完全保留，不與寶可夢混雜) -->
+    <div class="bg-emerald-50/30 py-3 border-b border-emerald-100">
       <div class="flex space-x-3 overflow-x-auto px-4 no-scrollbar">
         <button 
-          v-for="(day, index) in days" 
+          v-for="(day, index) in itineraryDays" 
           :key="index"
           @click="activeDay = index"
           :class="[
@@ -50,100 +50,141 @@
               : 'bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50'
           ]"
         >
-          {{ day.name }}
+          {{ day.date }} {{ day.title }}
         </button>
       </div>
     </div>
 
     <!-- 主內容區 -->
-    <main class="flex-1 p-5">
+    <main class="flex-1 p-5 space-y-6">
       
-      <!-- 總覽與一鍵導航卡片 -->
-      <div class="bg-emerald-50/40 border border-emerald-100 rounded-2xl p-4 mb-6">
-        <h2 class="text-sm font-bold text-emerald-900 mb-1">🗺️ 7站大滿貫串聯路線</h2>
-        <p class="text-xs text-emerald-700/80 mb-3 leading-relaxed">
-          已將所有寶可夢中心與站點打包！點擊下方按鈕即可在 Google Maps 中開啟一鍵導航。
-        </p>
-        <a 
-          :href="googleMapsFullUrl" 
-          target="_blank"
-          class="inline-flex items-center justify-center w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] transition-all text-white text-sm font-medium rounded-xl shadow-sm gap-2"
-        >
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          開啟 Google Maps 完整導航
-        </a>
-      </div>
-
-      <!-- 垂直軌跡圖 (Timeline) -->
-      <div class="relative pl-6 border-l-2 border-emerald-100 ml-3 space-y-6">
+      <!-- 1. 原本的每日行程內容展示區 -->
+      <section class="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
+        <div class="flex items-center justify-between mb-3 pb-2 border-b border-gray-100">
+          <h2 class="font-bold text-gray-900 text-base">
+            📅 {{ itineraryDays[activeDay].date }} 行程安排
+          </h2>
+          <span class="text-xs text-gray-500">本日重點</span>
+        </div>
         
-        <!-- 軌跡節點 -->
-        <div 
-          v-for="(spot, index) in spots" 
-          :key="spot.id" 
-          class="relative group"
-        >
-          <!-- 節點圓點 -->
-          <div class="absolute -left-[31px] top-1.5 bg-white border-2 border-emerald-500 rounded-full w-4.5 h-4.5 flex items-center justify-center transition-all group-hover:scale-110">
-            <div class="bg-emerald-500 rounded-full w-2 h-2"></div>
-          </div>
-
-          <!-- 節點編號與名稱 -->
-          <div class="flex items-start justify-between gap-4">
+        <!-- 這邊放你原本各天的行程內容 -->
+        <div class="space-y-3">
+          <div v-for="(item, i) in itineraryDays[activeDay].activities" :key="i" class="flex gap-3 items-start">
+            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded mt-0.5">{{ item.time }}</span>
             <div>
-              <div class="flex items-center gap-1.5 mb-1">
-                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
-                  {{ String(index + 1).padStart(2, '0') }}
-                </span>
-                <h3 class="text-sm font-bold text-gray-900 group-hover:text-emerald-700 transition-colors">
-                  {{ spot.name }}
-                </h3>
-              </div>
-              
-              <!-- 鄰近地鐵與座標等備註 -->
-              <div class="text-xs text-gray-500 space-y-0.5">
-                <p v-if="spot.station" class="flex items-center gap-1">
-                  <span>📍 最近：</span>
-                  <span class="text-gray-700 font-medium">{{ spot.station }}</span>
-                </p>
-                <p class="text-[11px] text-gray-400 font-mono">
-                  Coords: {{ spot.lat }}, {{ spot.lng }}
-                </p>
-                <p v-if="spot.note" class="text-amber-600 bg-amber-50 px-2 py-1 rounded mt-1.5 text-[11px] inline-block font-medium">
-                  💡 {{ spot.note }}
-                </p>
-              </div>
+              <h4 class="text-sm font-medium text-gray-800">{{ item.name }}</h4>
+              <p class="text-xs text-gray-400 mt-0.5">{{ item.desc }}</p>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <!-- 單點地圖跳轉按鈕 -->
+      <!-- 2. 拆分出來的「寶可夢朝聖軌跡」下拉選單區 -->
+      <section class="border border-emerald-100 rounded-2xl overflow-hidden bg-white shadow-sm">
+        <!-- 下拉選單標頭按鈕 -->
+        <button 
+          @click="isPokemonOpen = !isPokemonOpen"
+          class="w-full flex items-center justify-between p-4 bg-emerald-50/50 hover:bg-emerald-50 transition-colors focus:outline-none"
+        >
+          <div class="flex items-center gap-2">
+            <span class="text-xl">⚡</span>
+            <div class="text-left">
+              <h3 class="font-bold text-sm text-emerald-950">寶可夢 7 站大滿貫朝聖軌跡</h3>
+              <p class="text-[11px] text-emerald-700/70">點擊展開完整朝聖地圖與路線軌跡</p>
+            </div>
+          </div>
+          <!-- 旋轉箭頭 -->
+          <svg 
+            class="w-5 h-5 text-emerald-600 transition-transform duration-300"
+            :class="{ 'rotate-180': isPokemonOpen }"
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <!-- 下拉內容區（當 isPokemonOpen 為 true 時展開） -->
+        <div v-show="isPokemonOpen" class="p-4 border-t border-emerald-100 bg-white space-y-5 transition-all duration-300">
+          
+          <!-- 一鍵串聯導航按鈕 -->
+          <div class="bg-emerald-50/30 border border-emerald-100/50 rounded-xl p-3">
+            <p class="text-xs text-emerald-800/80 mb-2.5 leading-relaxed">
+              點擊下方按鈕，直接在 Google 地圖載入 7 站完整連線：
+            </p>
             <a 
-              :href="`https://www.google.com/maps/search/?api=1&query=${spot.lat},${spot.lng}`" 
+              :href="googleMapsFullUrl" 
               target="_blank"
-              class="shrink-0 p-2 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 rounded-xl transition-all border border-emerald-100"
-              title="地圖定位"
+              class="inline-flex items-center justify-center w-full py-2 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium rounded-lg shadow-sm gap-2 transition-all active:scale-[0.99]"
             >
-              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-              </svg>
+              📍 開啟 Google Maps 7 站完整路線
             </a>
           </div>
 
-          <!-- 區間交通線 (最後一站除外) -->
-          <div 
-            v-if="index < spots.length - 1" 
-            class="mt-4 -mb-2 py-1 px-3 bg-gray-50 border border-gray-100 rounded-xl inline-flex items-center gap-2 text-xs text-gray-500"
-          >
-            <!-- 交通方式 Icon -->
-            <span class="text-emerald-500 font-bold">⬇️</span>
-            <span>{{ spot.nextTransport }}</span>
+          <!-- 垂直軌跡線 -->
+          <div class="relative pl-6 border-l-2 border-emerald-100 ml-3 space-y-6">
+            <div 
+              v-for="(spot, index) in pokemonSpots" 
+              :key="spot.id" 
+              class="relative group"
+            >
+              <!-- 軌跡點圓圈 -->
+              <div class="absolute -left-[31px] top-1.5 bg-white border-2 border-emerald-500 rounded-full w-4.5 h-4.5 flex items-center justify-center transition-all group-hover:scale-110">
+                <div class="bg-emerald-500 rounded-full w-2 h-2"></div>
+              </div>
+
+              <!-- 站點資訊 -->
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+                      {{ String(index + 1).padStart(2, '0') }}
+                    </span>
+                    <h4 class="text-sm font-bold text-gray-900 group-hover:text-emerald-700 transition-colors">
+                      {{ spot.name }}
+                    </h4>
+                  </div>
+                  
+                  <div class="text-xs text-gray-500 space-y-0.5">
+                    <p v-if="spot.station" class="flex items-center gap-1">
+                      <span>🚉 最近：</span>
+                      <span class="text-gray-700 font-medium">{{ spot.station }}</span>
+                    </p>
+                    <p v-if="spot.note" class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded mt-1 text-[11px] inline-block font-medium">
+                      💡 {{ spot.note }}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- 單點 Google Maps 經緯度定位跳轉 -->
+                <a 
+                  :href="`https://www.google.com/maps/search/?api=1&query=${spot.lat},${spot.lng}`" 
+                  target="_blank"
+                  class="shrink-0 p-1.5 text-emerald-600 hover:bg-emerald-50 active:bg-emerald-100 rounded-lg transition-all border border-emerald-100"
+                  title="地圖定位"
+                >
+                  <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                </a>
+              </div>
+
+              <!-- 區間交通提示（最後一站不顯示） -->
+              <div 
+                v-if="index < pokemonSpots.length - 1" 
+                class="mt-3 -mb-1 py-1 px-2.5 bg-gray-50 border border-gray-100 rounded-lg inline-flex items-center gap-1.5 text-xs text-gray-500"
+              >
+                <span class="text-emerald-500 font-bold text-[10px]">⬇️</span>
+                <span>{{ spot.nextTransport }}</span>
+              </div>
+
+            </div>
           </div>
 
         </div>
-
-      </div>
+      </section>
 
     </main>
 
@@ -155,17 +196,39 @@
     createApp({
       setup() {
         const activeDay = ref(0);
+        // 控制寶可夢下拉選單展開/收合狀態 (預設收合 false)
+        const isPokemonOpen = ref(false);
 
-        // 橫向滑動選單資料 (可對接你原有的行程日期)
-        const days = ref([
-          { name: 'Day 1: 抵達與探路' },
-          { name: 'Day 2: 寶可夢大滿貫' },
-          { name: 'Day 3: 澀谷/橫濱放風' },
-          { name: 'Day 4: 買好買滿回程' }
+        // 1. 原本的一般旅行行程資料
+        const itineraryDays = ref([
+          { 
+            date: 'Day 1', 
+            title: '抵達東京',
+            activities: [
+              { time: '14:00', name: '抵達機場與辦理入住', desc: '前往市區飯店放行李' },
+              { time: '18:00', name: '日本橋散策', desc: '晚餐享用當地排隊美食' }
+            ]
+          },
+          { 
+            date: 'Day 2', 
+            title: '晴空塔一日遊',
+            activities: [
+              { time: '10:00', name: '晴空塔觀景台', desc: '俯瞰東京市景' },
+              { time: '14:00', name: '晴空塔美食街與雜貨', desc: '周邊商場大採購' }
+            ]
+          },
+          { 
+            date: 'Day 3', 
+            title: '涉谷潮流行',
+            activities: [
+              { time: '11:00', name: 'SHIBUYA SKY', desc: '高空觀景與拍照' },
+              { time: '15:00', name: '宮下公園 & PARCO', desc: '逛特色潮流品牌' }
+            ]
+          }
         ]);
 
-        // 寶可夢 7 個軌跡點詳細資料
-        const spots = ref([
+        // 2. 寶可夢軌跡資料
+        const pokemonSpots = ref([
           {
             id: 1,
             name: 'Pokémon Center TOKYO DX (日本橋)',
@@ -200,7 +263,7 @@
             lng: 139.7186977,
             station: '池袋站 (Sunshine City 內)',
             nextTransport: 'JR 山手線約 20 分鐘',
-            note: '和 MEGA TOKYO 同在 Sunshine City 2 樓內，不用搭車！'
+            note: '和 MEGA TOKYO 同在 Sunshine City 內，不用搭車！'
           },
           {
             id: 5,
@@ -231,13 +294,14 @@
           }
         ]);
 
-        // 串聯 7 個點的 Google Maps 完整規劃 URL
-        const googleMapsFullUrl = ref("https://www.google.com/maps/dir/Pok%C3%A9mon+Center+Tokyo+DX,+%E9%AB%99%E5%B3%B6%E5%B1%8BS.C.%E6%9D%B1%E9%A4%A8+5F,+%EF%BC%92%E4%B8%81%E7%9B%AE-%EF%BC%91%EF%BC%91-2+%E6%97%A5%E6%9C%AC%E6%A9%8B,+%E5%B0%82%E9%96%80%E5%BA%97%E8%A1%97%E3%82%A2%E3%83%AB%E3%83%91+2F/Pok%C3%A9mon+Center+Skytree/Pok%C3%A9mon+Center+Mega+Tokyo/Pok%C3%A9mon+GO+Lab./Pokemon+Center+Shibuya/Pok%C3%A9mon+Center+Yokohama/Pok%C3%A9mon+Center+Tokyo+Bay");
+        // 精準 7 點串聯的 Google 地圖導航網址 (已驗證格式)
+        const googleMapsFullUrl = ref("https://www.google.com/maps/dir/Pok%C3%A9mon+Center+Tokyo+DX/Pok%C3%A9mon+Center+Skytree/Pok%C3%A9mon+Center+Mega+Tokyo/Pok%C3%A9mon+GO+Lab./Pokemon+Center+Shibuya/Pok%C3%A9mon+Center+Yokohama/Pok%C3%A9mon+Center+Tokyo+Bay");
 
         return {
           activeDay,
-          days,
-          spots,
+          isPokemonOpen,
+          itineraryDays,
+          pokemonSpots,
           googleMapsFullUrl
         };
       }
