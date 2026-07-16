@@ -36,7 +36,7 @@
         <div>
           <span class="bg-aquagreen-700 bg-opacity-40 text-xs px-3 py-1 rounded-full font-medium">Tokyo 2026</span>
           <h1 class="text-2xl font-bold mt-2">東京自由行</h1>
-          <p class="text-xs text-aquagreen-100 mt-1">2026.07.19 – 07.25 | 熊&露 喬宇&芝穎 & 龍</p>
+          <p class="text-xs text-aquagreen-100 mt-1">2026.07.19 – 07.25 | 喬宇 & 芝穎</p>
         </div>
         <div class="text-right">
           <span class="text-xs block text-aquagreen-100">預估氣溫</span>
@@ -192,13 +192,14 @@
 
         <div class="border-t border-slate-100 pt-4 space-y-3">
           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">🍴 精選美食推薦 (點選即享單點導航)</h3>
-          <div class="space-y-2 text-xs">
+          <div class="space-y-3 text-xs">
             
             <div class="bg-orange-50/50 p-2.5 rounded-xl border border-orange-100 flex items-start gap-2">
               <span class="text-[10px] bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded font-bold mt-0.5">🍳 早餐</span>
               <div class="flex-1 space-y-1">
                 <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.breakfast)" target="_blank" class="block font-bold text-slate-700 hover:text-aquagreen-600">首選：{{ currentDay.meals.breakfast }}</a>
                 <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.breakfastAlt)" target="_blank" class="block text-slate-500 hover:text-aquagreen-600">備選：{{ currentDay.meals.breakfastAlt }}</a>
+                <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.breakfastNoBeef)" target="_blank" class="block text-emerald-600 font-bold hover:underline">🚫 無牛必去：{{ currentDay.meals.breakfastNoBeef }}</a>
               </div>
             </div>
 
@@ -207,6 +208,7 @@
               <div class="flex-1 space-y-1">
                 <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.lunch)" target="_blank" class="block font-bold text-slate-700 hover:text-aquagreen-600">首選：{{ currentDay.meals.lunch }}</a>
                 <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.lunchAlt)" target="_blank" class="block text-slate-500 hover:text-aquagreen-600">備選：{{ currentDay.meals.lunchAlt }}</a>
+                <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.lunchNoBeef)" target="_blank" class="block text-emerald-600 font-bold hover:underline">🚫 無牛必去：{{ currentDay.meals.lunchNoBeef }}</a>
               </div>
             </div>
 
@@ -214,7 +216,8 @@
               <span class="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-bold mt-0.5">🍺 晚餐</span>
               <div class="flex-1 space-y-1">
                 <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.dinner)" target="_blank" class="block font-bold text-slate-700 hover:text-aquagreen-600">首選：{{ currentDay.meals.dinner }}</a>
-                <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.dinnerAlt)" target="_blank" class="block text-slate-500 hover:text-aquagreen-600">備選：{{ currentDay.meals.dinnerAlt }} 🍻</a>
+                <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.dinnerAlt)" target="_blank" class="block text-slate-500 hover:text-aquagreen-600">備選：{{ currentDay.meals.dinnerAlt }}</a>
+                <a :href="'https://maps.google.com/?q=' + encodeURIComponent(currentDay.meals.dinnerNoBeef)" target="_blank" class="block text-emerald-600 font-bold hover:underline">🚫 無牛必去：{{ currentDay.meals.dinnerNoBeef }} 🍻</a>
               </div>
             </div>
 
@@ -225,7 +228,7 @@
     </main>
 
     <footer class="py-4 text-center border-t border-slate-100 text-[10px] text-slate-400">
-      Made with ❤️ for 喬宇 & 芝穎's Tokyo Adventure 2026
+      Made with 💚 for 喬宇 & 芝穎's Tokyo Adventure 2026
     </footer>
   </div>
 
@@ -256,9 +259,12 @@
             dayNum: "1", date: "7/19", week: "週日", fullDate: "2026.07.19 (Sun)",
             theme: "成田入境 × 澀谷配鏡與夜景", mapDesc: "🚇 交通：京成線 / 半藏門線", mapUrl: "https://maps.google.com/?q=澀谷",
             meals: { 
-              breakfast: "成田機場 輕食咖啡", breakfastAlt: "成田機場 T1 吉野家 (經典牛丼)",
+              breakfast: "成田機場 輕食咖啡", breakfastAlt: "成田機場 T1 吉野家",
+              breakfastNoBeef: "成田機場 T1 麵包與咖啡 (無牛輕食)",
               lunch: "星乃珈琲店 澀谷店", lunchAlt: "一蘭拉麵 澀谷西口店",
-              dinner: "六厘舍 晴空塔店", dinnerAlt: "世界の山ちゃん 澀谷店 (手羽先居酒屋)" 
+              lunchNoBeef: "Soup Stock Tokyo 澀谷店 (招牌雞肉溫暖湯品)",
+              dinner: "六厘舍 晴空塔店", dinnerAlt: "世界の山ちゃん 澀谷店 (手羽先居酒屋)",
+              dinnerNoBeef: "AFURI 澀谷 (神級香氣 柚子鹽拉麵)"
             },
             timeline: [
               { time: "11:15", title: "抵達成田機場", desc: "入境後購買限定款 Suica 與加熱菸。", mapQuery: "成田空港" },
@@ -271,9 +277,12 @@
             dayNum: "2", date: "7/20", week: "週一", fullDate: "2026.07.20 (Mon)",
             theme: "三麗鷗彩虹樂園 × 新宿不夜城", mapDesc: "🚇 交通：半藏門線 / 新宿線 / 京王線", mapUrl: "https://maps.google.com/?q=三麗鷗彩虹樂園",
             meals: { 
-              breakfast: "曳舟 7-11 (高機能熱食)", breakfastAlt: "松屋 曳舟店 (經典招牌日式朝食)",
-              lunch: "三麗鷗樂園主題餐廳", lunchAlt: "多摩中心 Eggcellent 蛋料理",
-              dinner: "敘敘苑 新宿小田急ハルク店", dinnerAlt: "鳥貴族 新宿東口店 (均一價連鎖居酒屋)" 
+              breakfast: "曳舟 7-11 (高機能熱食)", breakfastAlt: "松屋 曳舟店",
+              breakfastNoBeef: "摩斯漢堡 曳舟店 (經典蜜汁烤雞堡)",
+              lunch: "三麗鷗樂園主題餐廳", lunchAlt: "多摩中心 Eggcellent",
+              lunchNoBeef: "多摩中心 築地銀章魚燒 (經典外酥內嫩章魚燒)",
+              dinner: "敘敘苑 新宿小田急店", dinnerAlt: "鳥貴族 新宿東口店",
+              dinnerNoBeef: "新宿 天ぷら新宿つな八 (百年天婦羅名店，純海鮮蔬菜)"
             },
             timeline: [
               { time: "10:00", title: "三麗鷗彩虹樂園", desc: "全室內冷氣開放，開心與 Kitty 等角色拍照合影。", mapQuery: "サンリオピューロランド" },
@@ -285,9 +294,12 @@
             dayNum: "3", date: "7/21", week: "週二", fullDate: "2026.07.21 (Tue)",
             theme: "紅色狂熱：迪士尼樂園 (Land)", mapDesc: "🚌 交通：晴空塔直達巴士", mapUrl: "https://maps.google.com/?q=東京迪士尼樂園",
             meals: { 
-              breakfast: "晴空塔 麥當勞 (鬆餅堡)", breakfastAlt: "曳舟 羅森超商 (炸雞排 & 三明治)",
-              lunch: "紅心女王宴會大廳 (Land)", lunchAlt: "明日樂園舞台餐廳 (經典米奇漢堡)",
-              dinner: "利久牛舌 晴空塔店", dinnerAlt: "筑前屋 押上店 (熱血連鎖烤串居酒屋)" 
+              breakfast: "晴空塔 麥當勞", breakfastAlt: "曳舟 羅森超商",
+              breakfastNoBeef: "羅森 曳舟連絡通路店 (招牌炸雞排 & 蛋沙拉三明治)",
+              lunch: "紅心女王宴會大廳", lunchAlt: "明日樂園舞台餐廳",
+              lunchNoBeef: "廣場樓閣餐廳 (Land園區內 - 經典烤燒肉豬排飯)",
+              dinner: "利久牛舌 晴空塔店", dinnerAlt: "筑前屋 押上店",
+              dinnerNoBeef: "備長 鰻魚飯 晴空塔店 (極香炭烤鰻魚三吃)"
             },
             timeline: [
               { time: "07:00", title: "晴空塔巴士站排隊", desc: "前往晴空塔 1F 巴士轉運站現場排隊搭乘直達巴士。", mapQuery: "東京スカイツリータウン 団体バス乗り場" },
@@ -298,12 +310,15 @@
             dayNum: "4", date: "7/22", week: "週三", fullDate: "2026.07.22 (Wed)",
             theme: "淺草御守攻略 × 上野取鏡 × 秋葉原", mapDesc: "🚇 交通：都營淺草線 / 銀座線", mapUrl: "https://maps.google.com/?q=淺草寺",
             meals: { 
-              breakfast: "天國珈琲 淺草店", breakfastAlt: "珈琲 天国 (淺草復古烤吐司)",
-              lunch: "肉の大山 上野店 (和牛炸肉餅)", lunchAlt: "名代名物 宇奈とと 上野店 (平價鰻魚飯)",
-              dinner: "大統領 居酒屋 上野支店", dinnerAlt: "鳥惠 上野黑門店 (高級備長炭燒鳥居酒屋)" 
+              breakfast: "天國珈琲 淺草店", breakfastAlt: "珈琲 天国",
+              breakfastNoBeef: "珈琲天國 (淺草極具特色手作愛心鬆餅)",
+              lunch: "肉の大山 上野店", lunchAlt: "名代名物 宇奈とと 上野店",
+              lunchNoBeef: "拉麵 鴨to蔥 上野 (極致夢幻鴨肉拉麵，保證無牛)",
+              dinner: "大統領 居酒屋 上野支店", dinnerAlt: "鳥惠 上野黑門店",
+              dinnerNoBeef: "炸豬排 山家 上野店 (東京超高評價平價炸豬排店)"
             },
             timeline: [
-              { time: "09:30", title: "淺草寺巡禮", desc: "購入淺草寺桃形守、今戶神社招財貓黑御守、吉備子屋桃鈴。", mapQuery: "浅草寺" },
+              { time: "09:30", title: "淺草寺巡禮", desc: "購入淺草寺桃形守、今戶神社招財貓黑御守、吉備子屋桃鈴。", mapQuery: "浅寺" },
               { time: "15:00", title: "眼鏡市場・順路取鏡", desc: "前往上野眼鏡市場確認眼鏡完工並<strong>提前取鏡</strong>！", tag: "重要任務", mapQuery: "眼鏡市場 上野" },
               { time: "16:30", title: "秋葉原動漫街初探", desc: "順路漫步至隔壁的秋葉原，動漫、模型大樓探索。", mapQuery: "秋葉原駅" }
             ]
@@ -312,9 +327,12 @@
             dayNum: "5", date: "7/23", week: "週四", fullDate: "2026.07.23 (Thu)",
             theme: "藍色浪漫：迪士尼海洋 (Sea)", mapDesc: "🚌 交通：晴空塔直達巴士", mapUrl: "https://maps.google.com/?q=東京迪士尼海洋",
             meals: { 
-              breakfast: "全家 曳舟店 (飯糰 & 拿鐵)", breakfastAlt: "Sukiya 曳舟店 (特盛牛丼早餐)",
-              lunch: "夢幻泉鄉餐廳 (Sea)", lunchAlt: "火山餐廳 (經典中華拉麵飯)",
-              dinner: "名代 宇奈とと 浅草店 (鰻魚飯)", dinnerAlt: "磯丸水產 淺草店 (24h熱血海鮮炭烤居酒屋)" 
+              breakfast: "全家 曳舟店", breakfastAlt: "Sukiya 曳舟店",
+              breakfastNoBeef: "麥當勞 曳舟店 (經典豬肉滿福堡加蛋)",
+              lunch: "夢幻泉鄉餐廳", lunchAlt: "火山餐廳",
+              lunchNoBeef: "鱈魚岬錦標美食 (Sea園區內 - 達菲主題鱈魚漢堡)",
+              dinner: "名代 宇奈とと 浅草店", dinnerAlt: "磯丸水產 淺草店",
+              dinnerNoBeef: "淺草 炸豬排 ゆたか (大正創業老字號炸豬排)"
             },
             timeline: [
               { time: "07:00", title: "晴空塔巴士站出發", desc: "直達巴士上補眠，約 50 分鐘直達迪士尼海洋。", mapQuery: "東京スカイツリータウン" },
@@ -325,9 +343,12 @@
             dayNum: "6", date: "7/24", week: "週五", fullDate: "2026.07.24 (Fri)",
             theme: "表參道 LV 採購 × 黑色御守 × 東京鐵塔", mapDesc: "🚇 交通：半藏門線 / 銀座線 / 大江戶線", mapUrl: "https://maps.google.com/?q=東京鐵塔",
             meals: { 
-              breakfast: "Bills 表參道東急Plaza", breakfastAlt: "Café de L'ambre (銀座傳奇老派黑咖啡)",
-              lunch: "阿夫利 原宿店 (柚子鹽拉麵)", lunchAlt: "Red Rock 原宿店 (爆量烤牛肉火山丼)",
-              dinner: "牛かつ もと村 新橋店", dinnerAlt: "新橋 烏森かねだ (極具昭和人情味的燒鳥清酒屋)" 
+              breakfast: "Bills 表參道東急Plaza", breakfastAlt: "Café de L'ambre",
+              breakfastNoBeef: "Bills (世界第一超鬆軟香蕉蜂蜜鬆餅)",
+              lunch: "阿夫利 原宿店", lunchAlt: "Red Rock 原宿店",
+              lunchNoBeef: "炸豬排 舞泉青山本店 (殿堂級黑豚超厚切炸豬排)",
+              dinner: "牛かつ もと村 新橋店", dinnerAlt: "新橋 烏森かねだ",
+              dinnerNoBeef: "新橋 烏森かねだ (道地雞肉串燒配日式清酒)"
             },
             timeline: [
               { time: "09:30", title: "表參道潮流與 LV 採購", desc: "逛 Sanrio 表參道，並在 LV 精品旗艦店採購與辦理退稅。", mapQuery: "ルイ・ヴィトン 表参道店" },
@@ -339,9 +360,12 @@
             dayNum: "7", date: "7/25", week: "週六", fullDate: "2026.07.25 (Sat)",
             theme: "築地海鮮 ➔ 銀座補貨 ➔ 撤離 ➔ 返台", mapDesc: "🚇 交通：日比谷線 / 轉 Skyliner 快速直達", mapUrl: "https://maps.google.com/?q=京成上野駅",
             meals: { 
-              breakfast: "築地 狐狸屋牛丼", breakfastAlt: "築地 壽司大 (極上新鮮手握壽司)",
-              lunch: "銀座 煉瓦亭 (百年洋食蛋包飯)", lunchAlt: "銀座 篝 (極濃郁雞白湯拉麵)",
-              dinner: "成田機場 T1 拉麵道樂", dinnerAlt: "成田機場 壽司京辰 (登機前最後小酌居酒屋)" 
+              breakfast: "築地 狐狸屋牛丼", breakfastAlt: "築地 壽司大",
+              breakfastNoBeef: "築地 壽司大 (極上江戶前海鮮握壽司)",
+              lunch: "銀座 煉瓦亭", lunchAlt: "銀座 篝",
+              lunchNoBeef: "銀座 篝 本店 (排隊神店！極濃郁雞白湯拉麵)",
+              dinner: "成田機場 T1 拉麵道樂", dinnerAlt: "成田機場 壽司京辰",
+              dinnerNoBeef: "成田機場 T1 壽司京辰 (登機前極鮮海鮮與握壽司居酒屋)"
             },
             timeline: [
               { time: "08:00", title: "築地場外市場海鮮早餐", desc: "大啖狐狸屋牛丼、現烤生蠔與美味玉子燒。", mapQuery: "築地場外市場" },
