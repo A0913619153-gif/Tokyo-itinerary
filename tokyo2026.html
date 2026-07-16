@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>東京 7 天 6 夜自由行 2026</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Vue 3 CDN -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -42,7 +39,6 @@
 
   <div id="app" class="max-w-md mx-auto bg-white shadow-xl min-h-screen flex flex-col relative">
     
-    <!-- Header 頂部資訊 -->
     <header class="bg-gradient-to-r from-aquagreen-500 to-aquagreen-600 text-white p-6 rounded-b-[2rem] shadow-md">
       <div class="flex justify-between items-start">
         <div>
@@ -61,10 +57,8 @@
       </div>
     </header>
 
-    <!-- 主內容區 -->
     <main class="p-4 flex-1 space-y-4">
       
-      <!-- 卡片 1: 票券攻略 -->
       <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('tickets')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
           <span>🎟️ 出差前必買票券 & 任務</span>
@@ -81,7 +75,6 @@
         </div>
       </div>
 
-      <!-- 卡片 2: 御守與配鏡與限定御守攻略 -->
       <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('omamori')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
           <span>⛩️ 專屬御守、限定籤文與配鏡追蹤</span>
@@ -89,7 +82,6 @@
         </button>
         <div v-show="isOpen.omamori" class="p-4 text-xs space-y-4 text-slate-600 border-t border-aquagreen-100">
           
-          <!-- 配鏡進度 -->
           <div>
             <span class="font-bold text-slate-700 block mb-1">👓 配鏡時程（日本眼鏡市場）</span>
             <ul class="list-disc list-inside space-y-0.5 text-slate-500">
@@ -100,12 +92,10 @@
           
           <hr class="border-slate-100">
           
-          <!-- 御守清單與建議天數 -->
           <div>
             <span class="font-bold text-slate-700 block mb-2">📍 精選御守與限定籤文採購攻略</span>
             <div class="space-y-3">
               
-              <!-- 淺草區域 (Day 4) -->
               <div class="bg-slate-50 p-3 rounded-xl border-l-4 border-aquagreen-400">
                 <div class="flex justify-between items-center mb-1.5">
                   <span class="font-bold text-aquagreen-700 text-xs">🏮 淺草行程區</span>
@@ -124,7 +114,6 @@
                 </div>
               </div>
 
-              <!-- 新橋/銀座區域 (Day 6/Day 7) -->
               <div class="bg-slate-50 p-3 rounded-xl border-l-4 border-amber-400">
                 <div class="flex justify-between items-center mb-1.5">
                   <span class="font-bold text-amber-700 text-xs">🏢 新橋/銀座行程區</span>
@@ -140,7 +129,6 @@
                 </div>
               </div>
 
-              <!-- 夢幻限定備選 (Day 4/彈性) -->
               <div class="bg-slate-50 p-3 rounded-xl border-l-4 border-pink-400">
                 <div class="flex justify-between items-center mb-1.5">
                   <span class="font-bold text-pink-700 text-xs">🌸 夢幻限定備選</span>
@@ -158,88 +146,112 @@
         </div>
       </div>
 
-      <!-- 卡片 3: 寶可夢挑戰全制霸路線 (不與行程混在一起) -->
       <div class="border border-red-200 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('pokemon')" class="w-full flex justify-between items-center p-4 bg-red-50 text-red-800 font-bold text-sm">
-          <span>🔴 寶可夢聖地巡禮（極限 7 點全制霸路線）</span>
+          <span>🔴 寶可夢聖地巡禮（7 大站點獨立地圖）</span>
           <span class="text-xs">{{ isOpen.pokemon ? '▲ 收起' : '▼ 展開' }}</span>
         </button>
         <div v-show="isOpen.pokemon" class="p-4 text-xs space-y-4 border-t border-red-100">
           <p class="text-slate-500 text-[11px] leading-relaxed">
-            這是為寶可夢狂熱粉絲設計的<strong>一日特訓路線</strong>，一鍵導航串聯東京與周邊 7 大最核心的寶可夢中心、GO 實驗室與限定活動點。
+            點擊各站點下方的<strong>「🧭 開啟地圖」</strong>，可直接調用 Google Maps 進行單點路線導航與定位。
           </p>
 
-          <!-- 寶可夢地圖按鈕 -->
-          <a 
-            href="https://www.google.com/maps/dir/?api=1&origin=35.6849,139.7731&destination=35.6867,139.9908&waypoints=35.7101,139.8107%7C35.7299,139.7190%7C35.6595,139.6995%7C35.4551,139.6318&travelmode=transit" 
-            target="_blank" 
-            class="w-full bg-red-500 hover:bg-red-600 active:scale-95 transition-transform text-white text-center font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-red-100"
-          >
-            🗺️ 一鍵開啟 7 點串聯 Google Maps 軌跡
-          </a>
-
-          <!-- 關卡清單 -->
-          <div class="space-y-3 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-red-100 mt-2">
+          <div class="space-y-4 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-red-100 mt-2">
             
             <div class="flex space-x-3 relative items-start">
               <div class="w-7 h-7 flex-shrink-0 rounded-full bg-red-500 text-white flex items-center justify-center z-10 text-[11px] font-bold">1</div>
-              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100">
-                <h5 class="font-bold text-slate-800">Pokémon Center TOKYO DX（日本橋）</h5>
-                <p class="text-[10px] text-slate-500 mt-0.5">最近站：東京站、日本橋站</p>
-                <span class="text-[10px] text-red-600 block mt-1">🚇 搭地鐵前往下個點（約 20 分鐘）</span>
+              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100 space-y-2">
+                <div>
+                  <h5 class="font-bold text-slate-800">Pokémon Center TOKYO DX（日本橋）</h5>
+                  <p class="text-[10px] text-slate-500 mt-0.5">最近站：東京站、日本橋站</p>
+                </div>
+                <a href="https://maps.google.com/?q=35.6849,139.7731" target="_blank" class="inline-flex items-center gap-1 bg-white hover:bg-red-50 border border-red-200 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-lg transition-transform active:scale-95">
+                  🧭 開啟地圖 (日本橋)
+                </a>
+                <span class="text-[10px] text-red-600 block pt-1 border-t border-dashed border-red-200">🚇 搭地鐵前往下個點（約 20 分鐘）</span>
               </div>
             </div>
 
             <div class="flex space-x-3 relative items-start">
               <div class="w-7 h-7 flex-shrink-0 rounded-full bg-red-500 text-white flex items-center justify-center z-10 text-[11px] font-bold">2</div>
-              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100">
-                <h5 class="font-bold text-slate-800">Pokémon Center TOKYO SKYTREE TOWN</h5>
-                <p class="text-[10px] text-slate-500 mt-0.5">💡 抵達後記得轉限定活動轉盤！</p>
-                <span class="text-[10px] text-red-600 block mt-1">🚇 搭地鐵前往下個點（約 25–30 分鐘）</span>
+              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100 space-y-2">
+                <div>
+                  <h5 class="font-bold text-slate-800">Pokémon Center TOKYO SKYTREE TOWN</h5>
+                  <p class="text-[10px] text-slate-500 mt-0.5">💡 抵達後轉活動轉盤</p>
+                </div>
+                <a href="https://maps.google.com/?q=35.7101,139.8107" target="_blank" class="inline-flex items-center gap-1 bg-white hover:bg-red-50 border border-red-200 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-lg transition-transform active:scale-95">
+                  🧭 開啟地圖 (晴空塔)
+                </a>
+                <span class="text-[10px] text-red-600 block pt-1 border-t border-dashed border-red-200">🚇 搭地鐵前往下個點（約 25–30 分鐘）</span>
               </div>
             </div>
 
             <div class="flex space-x-3 relative items-start">
               <div class="w-7 h-7 flex-shrink-0 rounded-full bg-red-500 text-white flex items-center justify-center z-10 text-[11px] font-bold">3</div>
-              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100">
-                <h5 class="font-bold text-slate-800">Pokémon Center MEGA TOKYO（池袋）</h5>
-                <p class="text-[10px] text-slate-500 mt-0.5">位於池袋 Sunshine City 內</p>
-                <span class="text-[10px] text-red-600 block mt-1">🚶 步行僅 5 分鐘即可抵達下一關</span>
+              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100 space-y-2">
+                <div>
+                  <h5 class="font-bold text-slate-800">Pokémon Center MEGA TOKYO（池袋）</h5>
+                  <p class="text-[10px] text-slate-500 mt-0.5">池袋 Sunshine City 內</p>
+                </div>
+                <a href="https://maps.google.com/?q=35.7299,139.7190" target="_blank" class="inline-flex items-center gap-1 bg-white hover:bg-red-50 border border-red-200 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-lg transition-transform active:scale-95">
+                  🧭 開啟地圖 (池袋)
+                </a>
+                <span class="text-[10px] text-red-600 block pt-1 border-t border-dashed border-red-200">🚶 步行約 5 分鐘（同大樓內）</span>
               </div>
             </div>
 
             <div class="flex space-x-3 relative items-start">
               <div class="w-7 h-7 flex-shrink-0 rounded-full bg-red-500 text-white flex items-center justify-center z-10 text-[11px] font-bold">4</div>
-              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100">
-                <h5 class="font-bold text-slate-800">Pokémon GO Lab.（池袋 Sunshine City）</h5>
-                <p class="text-[10px] text-slate-500 mt-0.5">和 MEGA TOKYO 同一棟，免搭車！</p>
-                <span class="text-[10px] text-red-600 block mt-1">🚇 搭乘 JR 山手線（約 20 分鐘）</span>
+              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100 space-y-2">
+                <div>
+                  <h5 class="font-bold text-slate-800">Pokémon GO Lab.（池袋 Sunshine City）</h5>
+                  <p class="text-[10px] text-slate-500 mt-0.5">MEGA TOKYO 同在 Sunshine City 內</p>
+                </div>
+                <a href="https://maps.google.com/?q=35.7299,139.7190" target="_blank" class="inline-flex items-center gap-1 bg-white hover:bg-red-50 border border-red-200 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-lg transition-transform active:scale-95">
+                  🧭 開啟地圖 (GO Lab)
+                </a>
+                <span class="text-[10px] text-red-600 block pt-1 border-t border-dashed border-red-200">🚇 JR 山手線（約 20 分鐘）</span>
               </div>
             </div>
 
             <div class="flex space-x-3 relative items-start">
               <div class="w-7 h-7 flex-shrink-0 rounded-full bg-red-500 text-white flex items-center justify-center z-10 text-[11px] font-bold">5</div>
-              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100">
-                <h5 class="font-bold text-slate-800">Pokémon Center Shibuya</h5>
-                <p class="text-[10px] text-slate-500 mt-0.5">涉谷 PARCO 百貨內（超帥超夢培育槽）</p>
-                <span class="text-[10px] text-red-600 block mt-1">🚇 搭乘 JR（約 40–50 分鐘跨縣移動）</span>
+              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100 space-y-2">
+                <div>
+                  <h5 class="font-bold text-slate-800">Pokémon Center Shibuya</h5>
+                  <p class="text-[10px] text-slate-500 mt-0.5">涉谷 PARCO 6 樓</p>
+                </div>
+                <a href="https://maps.google.com/?q=35.6595,139.6995" target="_blank" class="inline-flex items-center gap-1 bg-white hover:bg-red-50 border border-red-200 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-lg transition-transform active:scale-95">
+                  🧭 開啟地圖 (澀谷)
+                </a>
+                <span class="text-[10px] text-red-600 block pt-1 border-t border-dashed border-red-200">🚇 JR（約 40–50 分鐘）</span>
               </div>
             </div>
 
             <div class="flex space-x-3 relative items-start">
               <div class="w-7 h-7 flex-shrink-0 rounded-full bg-red-500 text-white flex items-center justify-center z-10 text-[11px] font-bold">6</div>
-              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100">
-                <h5 class="font-bold text-slate-800">Pokémon Center Yokohama</h5>
-                <p class="text-[10px] text-slate-500 mt-0.5">橫濱經典臨海中心</p>
-                <span class="text-[10px] text-red-600 block mt-1">🚇 搭乘 JR 京葉線/武藏野線方向（約 40–50 分鐘）</span>
+              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100 space-y-2">
+                <div>
+                  <h5 class="font-bold text-slate-800">Pokémon Center Yokohama</h5>
+                  <p class="text-[10px] text-slate-500 mt-0.5">橫濱 OPA (丸井) 百貨東口</p>
+                </div>
+                <a href="https://maps.google.com/?q=35.4551,139.6318" target="_blank" class="inline-flex items-center gap-1 bg-white hover:bg-red-50 border border-red-200 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-lg transition-transform active:scale-95">
+                  🧭 開啟地圖 (橫濱)
+                </a>
+                <span class="text-[10px] text-red-600 block pt-1 border-t border-dashed border-red-200">🚇 JR 京葉線等（約 40–50 分鐘）</span>
               </div>
             </div>
 
             <div class="flex space-x-3 relative items-start">
               <div class="w-7 h-7 flex-shrink-0 rounded-full bg-red-500 text-white flex items-center justify-center z-10 text-[11px] font-bold">7</div>
-              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100">
-                <h5 class="font-bold text-slate-800">Pokémon Center TOKYO-BAY（南船橋）</h5>
-                <p class="text-[10px] text-slate-500 mt-0.5">終點站！千叶 Lalaport 購物中心內</p>
+              <div class="flex-1 bg-red-50/50 p-2.5 rounded-xl border border-red-100 space-y-2">
+                <div>
+                  <h5 class="font-bold text-slate-800">Pokémon Center TOKYO-BAY</h5>
+                  <p class="text-[10px] text-slate-500 mt-0.5">南船橋 LaLaport TOKYO-BAY 西館 2F</p>
+                </div>
+                <a href="https://maps.google.com/?q=35.6867,139.9908" target="_blank" class="inline-flex items-center gap-1 bg-white hover:bg-red-50 border border-red-200 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-lg transition-transform active:scale-95">
+                  🧭 開啟地圖 (船橋)
+                </a>
               </div>
             </div>
 
@@ -247,7 +259,6 @@
         </div>
       </div>
 
-      <!-- App風：橫向滑動日期選擇列 -->
       <div class="py-1">
         <h3 class="text-xs font-bold text-slate-400 mb-2 px-1 uppercase tracking-wider">選擇行程日期</h3>
         <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-2 px-1 snap-x">
@@ -265,7 +276,6 @@
         </div>
       </div>
 
-      <!-- 當日地圖導航按鈕 -->
       <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-2xl p-4 shadow-md flex items-center justify-between">
         <div class="space-y-1">
           <span class="text-[10px] bg-aquagreen-500 text-white px-2 py-0.5 rounded-full font-bold">Google Maps 軌跡</span>
@@ -282,10 +292,8 @@
         </a>
       </div>
 
-      <!-- 每日行程卡片 -->
       <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-4">
         
-        <!-- 當日主題 -->
         <div class="border-b border-slate-100 pb-3">
           <div class="flex items-center space-x-2">
             <span class="bg-aquagreen-100 text-aquagreen-700 text-xs font-bold px-2.5 py-1 rounded-full">Day {{ currentDay.dayNum }}</span>
@@ -294,7 +302,6 @@
           <h2 class="text-lg font-bold text-slate-800 mt-1">{{ currentDay.theme }}</h2>
         </div>
 
-        <!-- 每日時間軸 (Timeline) -->
         <div class="space-y-4 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-slate-100">
           <div v-for="(item, idx) in currentDay.timeline" :key="idx" class="flex space-x-4 relative items-start">
             <div class="w-7 h-7 flex-shrink-0 rounded-full bg-white border-2 border-aquagreen-500 flex items-center justify-center z-10 text-[10px] text-aquagreen-600 font-bold">
@@ -311,7 +318,6 @@
           </div>
         </div>
 
-        <!-- 推薦餐飲 -->
         <div class="border-t border-slate-100 pt-4 space-y-2">
           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">🍴 推薦餐飲清單</h3>
           <div class="grid grid-cols-3 gap-2">
@@ -345,7 +351,6 @@
     createApp({
       setup() {
         const activeDay = ref(0);
-        // 新增了 pokemon 折疊狀態
         const isOpen = ref({ tickets: false, omamori: false, pokemon: false });
 
         const toggleSection = (section) => {
