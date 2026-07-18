@@ -157,7 +157,7 @@
           <h4 class="text-xs font-bold">開啟 Day {{ currentDay.dayNum }} 路線導航</h4>
           <p class="text-[10px] text-slate-400">{{ currentDay.mapDesc }}</p>
         </div>
-          <a :href="currentDay.mapUrl" target="_blank" class="bg-aquagreen-500 hover:bg-aquagreen-600 text-white font-bold text-xs px-4 py-3 rounded-xl shadow-md">🗺️ 地圖</a>
+        <a :href="currentDay.mapUrl" target="_blank" class="bg-aquagreen-500 hover:bg-aquagreen-600 text-white font-bold text-xs px-4 py-3 rounded-xl shadow-md">🗺️ 地圖</a>
       </div>
 
       <!-- 每日詳細行程卡片 -->
@@ -315,11 +315,11 @@
           },
           {
             dayNum: "4", date: "7/22", week: "週三", fullDate: "2026.07.22 (Wed)",
-            theme: "淺草御守攻略 × 上野取鏡與街區加碼 × 秋葉原", mapDesc: "🚇 交通：都營淺草線 / 銀座線", mapUrl: "https://maps.google.com/?q=淺草寺",
+            theme: "淺草御守攻略 × 上野取鏡與街區加碼 × 秋葉原與居酒屋夜遊", mapDesc: "🚇 交通：都營淺草線 / 銀座線 / 日比谷線", mapUrl: "https://maps.google.com/?q=淺草寺",
             meals: { 
               breakfast: "天國珈琲 淺草店", breakfastAlt: "珈琲 天国",
               breakfastNoBeef: "珈琲天國 (淺草極具特色手作愛心鬆餅)",
-              lunch: "肉の大山 上野店", lunchAlt: "名代名物 宇奈とと 上野店",
+              lunch: "肉の大山 上野店", lunchAlt: "名代名物 宇奈と吐 上野店",
               lunchNoBeef: "拉麵 鴨to蔥 上野 (極致夢幻鴨肉拉麵，保證無牛)",
               dinner: "大統領 居酒屋 上野支店", dinnerAlt: "鳥惠 上野黑門店",
               dinnerNoBeef: "炸豬排 山家 上野店 (東京超高評價平價炸豬排店)"
@@ -327,7 +327,8 @@
             timeline: [
               { time: "09:30", title: "淺草寺巡禮", desc: "購入淺草寺桃形守、今戶神社招財貓黑御守、吉備子屋桃鈴。", mapQuery: "浅草寺" },
               { time: "14:30", title: "眼鏡市場取鏡 × 阿美橫丁散策", desc: "上野取鏡完成！隨後漫步充滿活力的<strong>阿美橫丁</strong>，吃現切哈密瓜水果串，補貨平價藥妝與日系零食。", tag: "新加碼", mapQuery: "阿美橫丁" },
-              { time: "16:30", title: "秋葉原動漫模型深度遊", desc: "攻佔地標 <strong>Radio Kaikan（無線電會館）</strong> 與 <strong>魂商直營店（Tamashii Nations Store）</strong>，爆量鋼彈、盒玩、動漫週邊深度尋寶！", tag: "新加碼", mapQuery: "秋葉原無線電會館" }
+              { time: "16:30", title: "秋葉原動漫模型深度遊", desc: "攻佔地標 <strong>Radio Kaikan（無線電會館）</strong>，爆量鋼彈、盒玩、動漫週邊深度尋寶！", tag: "新加碼", mapQuery: "秋葉原無線電會館" },
+              { time: "19:00", title: "上野下町居酒屋體驗 或 淺草寺夜間散策", desc: "返回上野「<strong>大統領居酒屋</strong>」享受炭火烤雞肉串與熱鬧氛圍（無牛肉地雷）；或搭車前往<strong>夜間點燈的淺草寺</strong>避開白天人潮拍神照，隨後返回曳舟。", tag: "夜間加碼", mapQuery: "大統領 支店" }
             ]
           },
           {
@@ -353,7 +354,7 @@
               breakfast: "Bills 表參道東急Plaza", breakfastAlt: "Café de L'ambre",
               breakfastNoBeef: "Bills (世界第一超鬆軟香蕉蜂蜜鬆餅)",
               lunch: "阿夫利 原宿店", lunchAlt: "Red Rock 原宿店",
-              lunchNoBeef: "炸豬排 舞泉青umball店 (殿堂級黑豚超厚切炸豬排)",
+              lunchNoBeef: "炸豬排 舞泉青山總店 (殿堂級黑豚超厚切炸豬排)",
               dinner: "牛かつ もと村 新橋店", dinnerAlt: "新橋 烏森かねだ",
               dinnerNoBeef: "新橋 烏森かねだ (道地雞肉串燒配日式清酒)"
             },
