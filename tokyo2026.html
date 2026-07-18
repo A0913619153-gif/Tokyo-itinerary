@@ -156,6 +156,7 @@
           <span class="text-[10px] bg-aquagreen-500 text-white px-2 py-0.5 rounded-full font-bold">當日完整軌跡</span>
           <h4 class="text-xs font-bold">開啟 Day {{ currentDay.dayNum }} 路線導航</h4>
           <p class="text-[10px] text-slate-400">{{ currentDay.mapDesc }}</p>
+          <p class="text-[10px] text-emerald-400 font-bold">🚗 建議出發時間：{{ currentDay.suggestedLeaveTime }}</p>
         </div>
         <a :href="currentDay.mapUrl" target="_blank" class="bg-aquagreen-500 hover:bg-aquagreen-600 text-white font-bold text-xs px-4 py-3 rounded-xl shadow-md">🗺️ 地圖</a>
       </div>
@@ -254,7 +255,7 @@
           { name: "Pokémon Center TOKYO DX", desc: "最近站：東京站、日本橋站", query: "Pokemon Center Tokyo DX" },
           { name: "Pokémon Center TOKYO SKYTREE TOWN", desc: "晴空塔內，順便轉活動轉盤", query: "Pokemon Center Tokyo Skytree Town" },
           { name: "Pokémon Center MEGA TOKYO", desc: "池袋 Sunshine City 內", query: "Pokemon Center Mega Tokyo" },
-          { name: "Pokémon GO Lab.", desc: "MEGA TOKYO 同在 Sunshine City 內", query: "Pokemon GO Lab" },
+          { name: "Pokémon Center  GO Lab.", desc: "MEGA TOKYO 同在 Sunshine City 內", query: "Pokemon GO Lab" },
           { name: "Pokémon Center Shibuya", desc: "澀谷 PARCO 6 樓", query: "Pokemon Center Shibuya" },
           { name: "Pokémon Center Yokohama", desc: "橫濱 OPA (丸井) 百貨東口", query: "Pokemon Center Yokohama" },
           { name: "Pokémon Center TOKYO-BAY", desc: "南船橋 LaLaport 西館 2F", query: "Pokemon Center TOKYO-BAY" }
@@ -264,6 +265,7 @@
           {
             dayNum: "1", date: "7/19", week: "週日", fullDate: "2026.07.19 (Sun)",
             theme: "成田入境 × 澀谷配鏡與夜景", mapDesc: "🚇 交通：京成線 / 半藏門線", mapUrl: "https://maps.google.com/?q=澀谷",
+            suggestedLeaveTime: "11:15 飛機降落（配合航班不需提早出發）",
             meals: { 
               breakfast: "成田機場 輕食咖啡", breakfastAlt: "成田機場 T1 吉野家",
               breakfastNoBeef: "成田機場 T1 麵包與咖啡 (無牛輕食)",
@@ -273,7 +275,7 @@
               dinnerNoBeef: "AFURI 澀谷 (神級香氣 柚子鹽拉麵)"
             },
             timeline: [
-              { time: "11:15", title: "抵達成田機場", desc: "入境後購買限定款 Suica 與加熱菸。", mapQuery: "成田空港" },
+              { time: "11:15", title: "🛬 航班降落成田機場", desc: "入境後購買限定款 Suica 與加熱菸。", mapQuery: "成田空港" },
               { time: "12:30", title: "專車直達曳舟旅館", desc: "專車直送免搬運！先前往旅館寄放行李。", mapQuery: "曳舟駅" },
               { time: "14:15", title: "澀谷配鏡與逛街", desc: "前往眼鏡市場辦理配鏡送件，隨後在附近原宿、澀谷商圈逛街。", mapQuery: "眼鏡市場 渋谷店" },
               { time: "16:40", title: "SHIBUYA SKY 登頂", desc: "欣賞最美夕陽與夜景。<strong class='text-red-500'>*需提前2個月預約</strong>", tag: "必搶票", mapQuery: "SHIBUYA SKY" },
@@ -283,6 +285,7 @@
           {
             dayNum: "2", date: "7/20", week: "週一", fullDate: "2026.07.20 (Mon)",
             theme: "三麗鷗彩虹樂園 × 新宿不夜城", mapDesc: "🚇 交通：半藏門線 / 新宿線 / 京王線", mapUrl: "https://maps.google.com/?q=三麗鷗彩虹樂園",
+            suggestedLeaveTime: "08:30（車程約 1 小時 15 分，確保 10 點開園準時入場）",
             meals: { 
               breakfast: "曳舟 7-11 (高機能熱食)", breakfastAlt: "松屋 曳舟店",
               breakfastNoBeef: "摩斯漢堡 曳舟店 (經典蜜汁烤雞堡)",
@@ -292,6 +295,7 @@
               dinnerNoBeef: "新宿 天ぷら新宿つな八 (百年天婦羅名店，純海鮮蔬菜)"
             },
             timeline: [
+              { time: "08:30", title: "🚗 建議出發", desc: "從曳舟站搭地鐵出發，前往多摩中心站。", mapQuery: "曳舟駅" },
               { time: "10:00", title: "三麗鷗彩虹樂園", desc: "全室內冷氣開放，開心與 Kitty 等角色拍照合影。", mapQuery: "サンリオピューロランド" },
               { time: "17:00", title: "新宿商圈 LV 血拼", desc: "前往高島屋或伊勢丹百貨採購 LV 與精品退稅。", mapQuery: "新宿タカシマヤ" },
               { time: "21:00", title: "唐吉訶德 新宿東口", desc: "藥妝與加熱菸補貨，隨後返回曳舟。", mapQuery: "ドン・キホーテ 新宿東口本店" }
@@ -300,6 +304,7 @@
           {
             dayNum: "3", date: "7/21", week: "週二", fullDate: "2026.07.21 (Tue)",
             theme: "紅色狂熱：迪士尼樂園 (Land)", mapDesc: "🚌 交通：晴空塔直達巴士", mapUrl: "https://maps.google.com/?q=東京迪士尼樂園",
+            suggestedLeaveTime: "06:40（提早到晴空塔巴士站現場排隊搭直達車）",
             meals: { 
               breakfast: "晴空塔 麥當勞", breakfastAlt: "曳舟 羅森超商",
               breakfastNoBeef: "羅森 曳舟連絡通路店 (招牌炸雞排 & 蛋沙拉三明治)",
@@ -309,32 +314,36 @@
               dinnerNoBeef: "備長 鰻魚飯 晴空塔店 (極香炭烤鰻魚三吃)"
             },
             timeline: [
-              { time: "07:00", title: "晴空塔巴士站排隊", desc: "前往晴空塔 1F 巴士轉運站現場排隊搭乘直達巴士。", mapQuery: "東京スカイツリータウン 団体バス乗り場" },
+              { time: "06:40", title: "🚗 建議出發至晴空塔", desc: "散步或搭車 1 站前往晴空塔 1F 巴士轉運站現場排隊。", mapQuery: "東京スカイツリータウン 団体バス乗り場" },
+              { time: "07:00", title: "晴空塔巴士站排隊", desc: "搭乘直達巴士前往迪士尼，在車上享用早餐、補眠。", mapQuery: "東京スカイツリータウン 団体バス乗り場" },
               { time: "08:30", title: "迪士尼樂園 全日暢玩", desc: "狂攻美女與野獸、太空山，觀看夢幻花車遊行。", mapQuery: "東京ディズニーランド" }
             ]
           },
           {
             dayNum: "4", date: "7/22", week: "週三", fullDate: "2026.07.22 (Wed)",
             theme: "淺草御守攻略 × 秋葉原動漫電玩全日深度探索", mapDesc: "🚇 交通: 都營淺草線 / 筑波快線 / 山手線", mapUrl: "https://maps.google.com/?q=淺草寺",
+            suggestedLeaveTime: "09:00（車程約 15 分鐘，避開上班最擠人潮）",
             meals: { 
               breakfast: "天國珈琲 淺草店", breakfastAlt: "拉麵 鴨to蔥 上野",
               breakfastNoBeef: "珈琲天國 (淺草極具特色手作愛心鬆餅)",
-              lunch: "秋葉原 肉の万世", lunchAlt: "名代名物 宇奈と吐 上野店",
+              lunch: "秋葉原 肉の万世", lunchAlt: "名代名物 宇奈とと 上野店",
               lunchNoBeef: "拉麵 鴨to蔥 上野 (極致夢幻鴨肉拉麵，保證無牛)",
               dinner: "大統領 居酒屋 上野支店", dinnerAlt: "鳥惠 上野黑門店",
               dinnerNoBeef: "秋葉原 炸豬排 丸五 (東京殿堂級神級炸豬排飯，免踩牛地雷)"
             },
             timeline: [
+              { time: "09:00", title: "🚗 建議出發", desc: "從曳舟站搭乘都營淺草線直達淺草站。", mapQuery: "曳舟駅" },
               { time: "09:30", title: "淺草寺與古街巡禮", desc: "搶先購入淺草寺桃形守、今戶神社招財貓黑御守、吉備子屋桃鈴。漫步仲見世通享受熱騰騰點心。", mapQuery: "浅草寺" },
-              { time: "13:00", title: "秋葉原「萬代魂」直營旗艦店", desc: "直接殺去位於秋葉原的 <strong>Tamashii Nations Store</strong>，朝聖最新、最齊全的鋼彈、魂商店限定模型與精緻公仔！", tag: "熱門朝聖", mapQuery: "TAMASHII NATIONS STORE TOKYO" },
+              { time: "13:00", title: "秋葉原「萬代魂」直營旗艦店", desc: "直接殺去位於秋葉原的 <strong>Tamashii Nations Store</strong>，朝聖最新、最齊全的鋼彈、魂商店限定模型與精緻公仔！", tag: "熱門朝盛", mapQuery: "TAMASHII NATIONS STORE TOKYO" },
               { time: "15:00", title: "秋葉原模型大樓深度尋寶", desc: "攻佔地標 <strong>Radio Kaikan（無線電會館）</strong> 與駿河屋，爆量動漫週邊、盒玩、珍貴卡牌深度挖寶！", mapQuery: "秋葉原無線電會館" },
               { time: "18:00", title: "Yodobashi-Akiba 終極掃貨", desc: "直奔巨型 <strong>Yodobashi（友都八喜）</strong>！扭蛋牆區、美妝電器瘋狂採購，商場營業至 22:00（大推 8 樓無牛海鮮美食街）。", tag: "大容量商場", mapQuery: "ヨドバシカメラ マルチメディアAkiba" },
               { time: "20:00", title: "上野露天居酒屋街體驗", desc: "搭車 2 分鐘回上野「<strong>大統領居酒屋</strong>」或「文樂」，享受最道地的炭火烤雞肉串與烤豬五花，配上冰涼 Highball 暢談戰利品！", tag: "深夜暢飲", mapQuery: "大統領 支店" }
             ]
           },
           {
-            dayNum: "5", date: "7/23", week: "週開", fullDate: "2026.07.23 (Thu)",
+            dayNum: "5", date: "7/23", week: "週四", fullDate: "2026.07.23 (Thu)",
             theme: "藍色浪漫：迪士尼海洋 (Sea)", mapDesc: "🚌 交通：晴空塔直達巴士", mapUrl: "https://maps.google.com/?q=東京迪士尼海洋",
+            suggestedLeaveTime: "06:40（提早前往晴空塔巴士站排隊，確保提早抵達海洋園區）",
             meals: { 
               breakfast: "全家 曳舟店", breakfastAlt: "Sukiya 曳舟店",
               breakfastNoBeef: "麥當勞 曳舟店 (經典豬肉滿福堡加蛋)",
@@ -344,6 +353,7 @@
               dinnerNoBeef: "淺草 炸豬排 ゆたか (大正創業老字號炸豬排)"
             },
             timeline: [
+              { time: "06:40", title: "🚗 建議出發至晴空塔", desc: "前往晴空塔 1F 巴士轉運站現場排隊搭乘直達車。", mapQuery: "東京スカイツリータウン" },
               { time: "07:00", title: "晴空塔巴士站出發", desc: "直達巴士上補眠，約 50 分鐘直達迪士尼海洋。", mapQuery: "東京スカイツリータウン" },
               { time: "08:30", title: "迪士尼海洋 全日暢玩", desc: "狂衝全新「夢幻泉鄉 Fantasy Springs」魔法園區！", mapQuery: "ファンタジースプリングス" }
             ]
@@ -351,6 +361,7 @@
           {
             dayNum: "6", date: "7/24", week: "週五", fullDate: "2026.07.24 (Fri)",
             theme: "表參道 LV 採購 × 黑色御守 × 東京鐵塔", mapDesc: "🚇 交通：半藏門線 / 銀座線 / 大江戶線", mapUrl: "https://maps.google.com/?q=東京鐵塔",
+            suggestedLeaveTime: "09:00（車程約 30 分鐘，趕在精品店人潮變多前抵達）",
             meals: { 
               breakfast: "Bills 表參道東急Plaza", breakfastAlt: "Café de L'ambre",
               breakfastNoBeef: "Bills (世界第一超鬆軟香蕉蜂蜜鬆餅)",
@@ -360,6 +371,7 @@
               dinnerNoBeef: "新橋 烏森かねだ (道地雞肉串燒配日式清酒)"
             },
             timeline: [
+              { time: "09:00", title: "🚗 建議出發", desc: "由曳舟站搭乘半藏門線直達表參道站。", mapQuery: "曳舟駅" },
               { time: "09:30", title: "表參道潮流與 LV 採購", desc: "逛 Sanrio 表參道，並在 LV 精品旗艦店採購與辦理退稅。", mapQuery: "ルイ・ヴィトン 表参道店" },
               { time: "14:00", title: "（備選取鏡點）澀谷眼鏡取件", desc: "若 Day 1 未取鏡，此時可從表參道搭乘銀座線/半藏門線 1 站（2分鐘）回澀谷快速取件，隨後前往新橋。", tag: "備選取鏡", mapQuery: "眼鏡市場 渋谷店" },
               { time: "15:00", title: "烏森神社黑色御守", desc: "購買罕見黑色「癌封じ」健康守與彩色籤文。", mapQuery: "烏森神社" },
@@ -369,15 +381,17 @@
           {
             dayNum: "7", date: "7/25", week: "週六", fullDate: "2026.07.25 (Sat)",
             theme: "築地海鮮 ➔ 銀座補貨 ➔ 撤離 ➔ 返台", mapDesc: "🚇 交通：日比谷線 / 轉 Skyliner 快速直達", mapUrl: "https://maps.google.com/?q=京成上野駅",
+            suggestedLeaveTime: "07:30（打包好大行李出發，開啟最後衝刺）",
             meals: { 
               breakfast: "築地 狐狸屋牛丼", breakfastAlt: "築地 壽司大",
               breakfastNoBeef: "築地 壽司大 (極上江戶前海鮮握壽司)",
               lunch: "銀座 煉瓦亭", lunchAlt: "銀座 篝",
-              lunchNoBeef: "銀座 篝 本店 (排隊神店！極濃郁雞白湯拉麵)",
+              lunchNoBeef: "銀座 篝 本店 (排隊神店！極濃域雞白湯拉麵)",
               dinner: "成田機場 T1 拉麵道樂", dinnerAlt: "成田機場 壽司京辰",
               dinnerNoBeef: "成田機場 T1 壽司京辰 (登機前最後小酌居酒屋)"
             },
             timeline: [
+              { time: "07:30", title: "🚗 建議出發（拉大行李）", desc: "退房並攜帶所有大行李出發前往築地市場。", mapQuery: "曳舟駅" },
               { time: "08:00", title: "築地場外市場海鮮早餐", desc: "大啖狐狸屋牛丼、現烤生蠔與美味玉子燒。", mapQuery: "築地場外市場" },
               { time: "11:30", title: "⚡ 緊急！大行李撤離上野", desc: "15:00 後煙火大會大管制！必須中午前將大行李拉至上野寄放！", tag: "極重要", mapQuery: "京成上野駅" },
               { time: "16:00", title: "Skyliner 直奔成田機場", desc: "上野搭乘 Skyliner（41分）前往成田機場一航廈搭機返台。", mapQuery: "成田国際空港" }
