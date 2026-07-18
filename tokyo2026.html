@@ -31,7 +31,6 @@
 
   <div id="app" class="max-w-md mx-auto bg-white shadow-xl min-h-screen flex flex-col relative">
     
-    <!-- 頂部資訊 Header -->
     <header class="bg-gradient-to-r from-aquagreen-500 to-aquagreen-600 text-white p-6 rounded-b-[2rem] shadow-md">
       <div class="flex justify-between items-start">
         <div>
@@ -49,10 +48,8 @@
       </div>
     </header>
 
-    <!-- 主內容區 -->
     <main class="p-4 flex-1 space-y-4">
       
-      <!-- 卡片 1: 票券任務 -->
       <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('tickets')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
           <span>🎟️ 出發前必備票券 & 任務</span>
@@ -67,7 +64,6 @@
         </div>
       </div>
 
-      <!-- 卡片 2: 御守與配鏡 -->
       <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('omamori')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
           <span>⛩️ 專屬御守、限定籤文與配鏡追蹤</span>
@@ -77,8 +73,8 @@
           <div>
             <span class="font-bold text-slate-700 block mb-1">👓 眼鏡市場配鏡時程</span>
             <ul class="list-disc list-inside space-y-0.5 text-slate-500">
-              <li><strong>Day 1 (7/19)：</strong> 澀谷/上野店送件</li>
-              <li><strong>Day 4 (7/22)：</strong> 確認完工 ➔ <strong>今天順路取鏡！</strong></li>
+              <li><strong>Day 1 (7/19)：</strong> 澀谷店送件辦理 ➔ <strong>當天直接取鏡！</strong></li>
+              <li><strong>Day 4 (7/22)：</strong> <span class="text-emerald-600 font-bold">免取鏡行程！全天專注漫遊與動漫深度採購。</span></li>
             </ul>
           </div>
           <hr class="border-slate-100">
@@ -116,7 +112,6 @@
         </div>
       </div>
 
-      <!-- 卡片 3: 寶可夢聖地地圖 -->
       <div class="border border-red-200 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('pokemon')" class="w-full flex justify-between items-center p-4 bg-red-50 text-red-800 font-bold text-sm">
           <span>🔴 寶可夢聖地巡禮（7 大站點獨立導航）</span>
@@ -136,7 +131,6 @@
         </div>
       </div>
 
-      <!-- App風：橫向滑動日期選擇 -->
       <div class="py-1">
         <h3 class="text-xs font-bold text-slate-400 mb-2 px-1 uppercase tracking-wider">選擇行程日期</h3>
         <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-2 px-1 snap-x">
@@ -150,7 +144,6 @@
         </div>
       </div>
 
-      <!-- 當日地圖導航總覽 -->
       <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-2xl p-4 shadow-md flex items-center justify-between">
         <div class="space-y-1">
           <span class="text-[10px] bg-aquagreen-500 text-white px-2 py-0.5 rounded-full font-bold">當日完整軌跡</span>
@@ -160,7 +153,6 @@
         <a :href="currentDay.mapUrl" target="_blank" class="bg-aquagreen-500 hover:bg-aquagreen-600 text-white font-bold text-xs px-4 py-3 rounded-xl shadow-md">🗺️ 地圖</a>
       </div>
 
-      <!-- 每日詳細行程卡片 -->
       <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-4">
         <div class="border-b border-slate-100 pb-3">
           <div class="flex items-center space-x-2">
@@ -170,7 +162,6 @@
           <h2 class="text-lg font-bold text-slate-800 mt-1">{{ currentDay.theme }}</h2>
         </div>
 
-        <!-- 每日時間軸 (Timeline) -->
         <div class="space-y-4 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-slate-100">
           <div v-for="(item, idx) in currentDay.timeline" :key="idx" class="flex space-x-4 relative items-start">
             <div class="w-7 h-7 flex-shrink-0 rounded-full bg-white border-2 border-aquagreen-500 flex items-center justify-center z-10 text-[10px] text-aquagreen-600 font-bold">
@@ -192,12 +183,10 @@
           </div>
         </div>
 
-        <!-- 三餐飲推薦 (包含無牛專區) -->
         <div class="border-t border-slate-100 pt-4 space-y-3">
           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">🍴 精選美食推薦 (點選即享單點導航)</h3>
           <div class="space-y-3 text-xs">
             
-            <!-- 早餐 -->
             <div class="bg-orange-50/50 p-2.5 rounded-xl border border-orange-100 flex items-start gap-2">
               <span class="text-[10px] bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded font-bold mt-0.5">🍳 早餐</span>
               <div class="flex-1 space-y-1">
@@ -207,7 +196,6 @@
               </div>
             </div>
 
-            <!-- 午餐 -->
             <div class="bg-emerald-50/40 p-2.5 rounded-xl border border-emerald-100 flex items-start gap-2">
               <span class="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold mt-0.5">🍱 午餐</span>
               <div class="flex-1 space-y-1">
@@ -217,7 +205,6 @@
               </div>
             </div>
 
-            <!-- 晚餐 -->
             <div class="bg-indigo-50/40 p-2.5 rounded-xl border border-indigo-100 flex items-start gap-2">
               <span class="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-bold mt-0.5">🍺 晚餐</span>
               <div class="flex-1 space-y-1">
@@ -273,9 +260,9 @@
               dinnerNoBeef: "AFURI 澀谷 (神級香氣 柚子鹽拉麵)"
             },
             timeline: [
-              { time: "11:15", title: "抵達成田機場", desc: "入境後購買限定款 Suica 與加熱菸。", mapQuery: "成田空港" },
+              { time: "11:15", title: "抵達成體機場", desc: "入境後購買限定款 Suica 與加熱菸。", mapQuery: "成田空港" },
               { time: "12:30", title: "專車直達曳舟旅館", desc: "專車直送免搬運！先前往旅館寄放行李。", mapQuery: "曳舟駅" },
-              { time: "14:15", title: "澀谷配鏡與逛街", desc: "前往眼鏡市場辦理配鏡送件，澀谷原宿逛街。", mapQuery: "眼鏡市場 渋谷店" },
+              { time: "14:15", title: "澀谷配鏡與逛街", desc: "前往眼鏡市場辦理配鏡送件（當天可取鏡），澀谷原宿逛街。", mapQuery: "眼鏡市場 渋谷店" },
               { time: "16:40", title: "SHIBUYA SKY 登頂", desc: "欣賞最美夕陽與夜景。<strong class='text-red-500'>*需提前2個月預約</strong>", tag: "必搶票", mapQuery: "SHIBUYA SKY" },
               { time: "18:30", title: "澀谷潮流百貨探索", desc: "下樓直接逛共構的 <strong>Shibuya Scramble Square</strong>，或是步行前往有寶可夢中心的 <strong>Shibuya PARCO</strong> 與精緻選物的 <strong>澀谷Hikarie</strong> 散策購物！", mapQuery: "Shibuya Scramble Square" }
             ]
@@ -315,20 +302,21 @@
           },
           {
             dayNum: "4", date: "7/22", week: "週三", fullDate: "2026.07.22 (Wed)",
-            theme: "淺草御守攻略 × 上野取鏡與街區加碼 × 秋葉原與居酒屋夜遊", mapDesc: "🚇 交通：都營淺草線 / 銀座線 / 日比谷線", mapUrl: "https://maps.google.com/?q=淺草寺",
+            theme: "淺草御守攻略 × 秋葉原動漫電玩全日深度探索", mapDesc: "🚇 交通: 都營淺草線 / 筑波快線 / 山手線", mapUrl: "https://maps.google.com/?q=淺草寺",
             meals: { 
-              breakfast: "天國珈琲 淺草店", breakfastAlt: "珈琲 天国",
+              breakfast: "天國珈琲 淺草店", breakfastAlt: "拉麵 鴨to蔥 上野",
               breakfastNoBeef: "珈琲天國 (淺草極具特色手作愛心鬆餅)",
-              lunch: "肉の大山 上野店", lunchAlt: "名代名物 宇奈と吐 上野店",
+              lunch: "秋葉原 肉の万世", lunchAlt: "名代名物 宇奈とと 上野店",
               lunchNoBeef: "拉麵 鴨to蔥 上野 (極致夢幻鴨肉拉麵，保證無牛)",
               dinner: "大統領 居酒屋 上野支店", dinnerAlt: "鳥惠 上野黑門店",
-              dinnerNoBeef: "炸豬排 山家 上野店 (東京超高評價平價炸豬排店)"
+              dinnerNoBeef: "秋葉原 炸豬排 丸五 (東京殿堂級神級炸豬排飯，免踩牛地雷)"
             },
             timeline: [
-              { time: "09:30", title: "淺草寺巡禮", desc: "購入淺草寺桃形守、今戶神社招財貓黑御守、吉備子屋桃鈴。", mapQuery: "浅草寺" },
-              { time: "14:30", title: "眼鏡市場取鏡 × 阿美橫丁散策", desc: "上野取鏡完成！隨後漫步充滿活力的<strong>阿美橫丁</strong>，吃現切哈密瓜水果串，補貨平價藥妝與日系零食。", tag: "新加碼", mapQuery: "阿美橫丁" },
-              { time: "16:30", title: "秋葉原動漫模型深度遊", desc: "攻佔地標 <strong>Radio Kaikan（無線電會館）</strong>，爆量鋼彈、盒玩、動漫週邊深度尋寶！", tag: "新加碼", mapQuery: "秋葉原無線電會館" },
-              { time: "19:00", title: "上野下町居酒屋體驗 或 淺草寺夜間散策", desc: "返回上野「<strong>大統領居酒屋</strong>」享受炭火烤雞肉串與熱鬧氛圍（無牛肉地雷）；或搭車前往<strong>夜間點燈的淺草寺</strong>避開白天人潮拍神照，隨後返回曳舟。", tag: "夜間加碼", mapQuery: "大統領 支店" }
+              { time: "09:30", title: "淺草寺與古街巡禮", desc: "搶先購入淺草寺桃形守、今戶神社招財貓黑御守、吉備子屋桃鈴。漫步仲見世通享受熱騰騰點心。", mapQuery: "浅浅寺" },
+              { time: "13:00", title: "秋葉原「萬代魂」直營旗艦店", desc: "直接殺去位於秋葉原的 <strong>Tamashii Nations Store</strong>，朝聖最新、最齊全的鋼彈、魂商店限定模型與精緻公仔！", tag: "熱門朝聖", mapQuery: "TAMASHII NATIONS STORE TOKYO" },
+              { time: "15:00", title: "秋葉原模型大樓深度尋寶", desc: "攻佔地標 <strong>Radio Kaikan（無線電會館）</strong> 與駿河屋，爆量動漫週邊、盒玩、珍貴卡牌深度挖寶！", mapQuery: "秋葉原無線電會館" },
+              { time: "18:00", title: "Yodobashi-Akiba 終極掃貨", desc: "直奔巨型 <strong>Yodobashi（友都八喜）</strong>！扭蛋牆區、美妝電器瘋狂採購，商場營業至 22:00（大推 8 樓無牛海鮮美食街）。", tag: "大容量商場", mapQuery: "ヨドバシカメラ マルチメディアAkiba" },
+              { time: "20:00", title: "上野露天居酒屋街體驗", desc: "搭車 2 分鐘回上野「<strong>大統領居酒屋</strong>」或「文樂」，享受最道地的炭火烤雞肉串與烤豬五花，配上冰涼 Highball 暢談戰利品！", tag: "深夜暢飲", mapQuery: "大統領 支店" }
             ]
           },
           {
