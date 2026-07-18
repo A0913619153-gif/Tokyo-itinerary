@@ -31,6 +31,7 @@
 
   <div id="app" class="max-w-md mx-auto bg-white shadow-xl min-h-screen flex flex-col relative">
     
+    <!-- 頂部資訊 Header -->
     <header class="bg-gradient-to-r from-aquagreen-500 to-aquagreen-600 text-white p-6 rounded-b-[2rem] shadow-md">
       <div class="flex justify-between items-start">
         <div>
@@ -44,12 +45,14 @@
         </div>
       </div>
       <div class="mt-4 bg-white bg-opacity-15 p-3 rounded-xl text-xs text-aquagreen-50">
-        📌 <strong>重要：</strong> 7/25 隅田川煙火大會管制！一大早完成退房後，請先將大行李拉至上野寄放，再開啟當日行程。
+        📌 <strong>重要：</strong> 7/25 隅田川煙火大會管制！一大早退房後，請直奔「京成上野站」寄放行李。該站與地鐵日比谷線地下互通，免出站即可轉乘！
       </div>
     </header>
 
+    <!-- 主內容區 -->
     <main class="p-4 flex-1 space-y-4">
       
+      <!-- 卡片 1: 票券任務 -->
       <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('tickets')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
           <span>🎟️ 出發前必備票券 & 任務</span>
@@ -64,6 +67,7 @@
         </div>
       </div>
 
+      <!-- 卡片 2: 御守與配鏡 -->
       <div class="border border-aquagreen-100 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('omamori')" class="w-full flex justify-between items-center p-4 bg-aquagreen-50 text-aquagreen-800 font-medium text-sm">
           <span>⛩️ 專屬御守、限定籤文與配鏡追蹤</span>
@@ -112,6 +116,7 @@
         </div>
       </div>
 
+      <!-- 卡片 3: 寶可夢聖地地圖 -->
       <div class="border border-red-200 rounded-2xl bg-white overflow-hidden shadow-sm">
         <button @click="toggleSection('pokemon')" class="w-full flex justify-between items-center p-4 bg-red-50 text-red-800 font-bold text-sm">
           <span>🔴 寶可夢聖地巡禮（7 大站點獨立導航）</span>
@@ -131,6 +136,7 @@
         </div>
       </div>
 
+      <!-- App風：橫向滑動日期選擇 -->
       <div class="py-1">
         <h3 class="text-xs font-bold text-slate-400 mb-2 px-1 uppercase tracking-wider">選擇行程日期</h3>
         <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-2 px-1 snap-x">
@@ -144,6 +150,7 @@
         </div>
       </div>
 
+      <!-- 當日地圖導航總覽 -->
       <div class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-2xl p-4 shadow-md flex items-center justify-between">
         <div class="space-y-1">
           <span class="text-[10px] bg-aquagreen-500 text-white px-2 py-0.5 rounded-full font-bold">當日完整軌跡</span>
@@ -154,6 +161,7 @@
         <a :href="currentDay.mapUrl" target="_blank" class="bg-aquagreen-500 hover:bg-aquagreen-600 text-white font-bold text-xs px-4 py-3 rounded-xl shadow-md">🗺️ 地圖</a>
       </div>
 
+      <!-- 每日詳細行程卡片 -->
       <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-4">
         <div class="border-b border-slate-100 pb-3">
           <div class="flex items-center space-x-2">
@@ -163,6 +171,7 @@
           <h2 class="text-lg font-bold text-slate-800 mt-1">{{ currentDay.theme }}</h2>
         </div>
 
+        <!-- 每日時間軸 (Timeline) -->
         <div class="space-y-4 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-slate-100">
           <div v-for="(item, idx) in currentDay.timeline" :key="idx" class="flex space-x-4 relative items-start">
             <div class="w-7 h-7 flex-shrink-0 rounded-full bg-white border-2 border-aquagreen-500 flex items-center justify-center z-10 text-[10px] text-aquagreen-600 font-bold">
@@ -184,10 +193,12 @@
           </div>
         </div>
 
+        <!-- 三餐飲推薦 (包含無牛專區) -->
         <div class="border-t border-slate-100 pt-4 space-y-3">
           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">🍴 精選美食推薦 (點選即享單點導航)</h3>
           <div class="space-y-3 text-xs">
             
+            <!-- 早餐 -->
             <div class="bg-orange-50/50 p-2.5 rounded-xl border border-orange-100 flex items-start gap-2">
               <span class="text-[10px] bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded font-bold mt-0.5">🍳 早餐</span>
               <div class="flex-1 space-y-1">
@@ -197,6 +208,7 @@
               </div>
             </div>
 
+            <!-- 午餐 -->
             <div class="bg-emerald-50/40 p-2.5 rounded-xl border border-emerald-100 flex items-start gap-2">
               <span class="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold mt-0.5">🍱 午餐</span>
               <div class="flex-1 space-y-1">
@@ -206,6 +218,7 @@
               </div>
             </div>
 
+            <!-- 晚餐 -->
             <div class="bg-indigo-50/40 p-2.5 rounded-xl border border-indigo-100 flex items-start gap-2">
               <span class="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-bold mt-0.5">🍺 晚餐</span>
               <div class="flex-1 space-y-1">
@@ -321,7 +334,7 @@
             timeline: [
               { time: "09:00", title: "🚗 建議出發", desc: "從曳舟站搭乘都營淺草線直達淺草站。", mapQuery: "曳舟駅" },
               { time: "09:30", title: "淺草寺與古街巡禮", desc: "搶先購入淺草寺桃形守、今戶神社招財貓黑御守、吉備子屋桃鈴。漫步仲見世通享受熱騰騰點心。", mapQuery: "浅草寺" },
-              { time: "13:00", title: "秋葉原「萬代魂」直營旗艦店", desc: "直接殺去位於秋葉原的 <strong>Tamashii Nations Store</strong>，朝聖最新、最齊全的鋼彈、魂商店限定模型與精緻公仔！", tag: "熱門朝聖", mapQuery: "TAMASHII NATIONS STORE TOKYO" },
+              { time: "13:00", title: "秋葉原「萬代魂」直營旗艦店", desc: "直接殺去位於秋葉原的 <strong>Tamashii Nations Store</strong>，朝盛最新、最齊全的鋼彈、魂商店限定模型與精緻公仔！", tag: "熱門朝聖", mapQuery: "TAMASHII NATIONS STORE TOKYO" },
               { time: "15:00", title: "秋葉原模型大樓深度尋寶", desc: "攻佔地標 <strong>Radio Kaikan（無線電會館）</strong> 與駿河屋，爆量動漫週邊、盒玩、珍貴卡牌深度挖寶！", mapQuery: "秋葉原無線電會館" },
               { time: "18:00", title: "Yodobashi-Akiba 終極掃貨", desc: "直奔巨型 <strong>Yodobashi（友都八喜）</strong>！扭蛋牆區、美妝電器瘋狂採購，商場營業至 22:00（大推 8 樓無牛海鮮美食街）。", tag: "大容量商場", mapQuery: "ヨドバシカメラ マルチメディアAkiba" },
               { time: "20:00", title: "上野露天居酒屋街體驗", desc: "搭車 2 分鐘回上野「<strong>大統領居酒屋</strong>」或「文樂」，享受最道地的炭火烤雞肉串與烤豬五花，配上冰涼 Highball 暢談戰利品！", tag: "深夜暢飲", mapQuery: "大統領 支店" }
@@ -367,8 +380,8 @@
           },
           {
             dayNum: "7", date: "7/25", week: "週六", fullDate: "2026.07.25 (Sat)",
-            theme: "上野行李託管 ➔ 築地早餐 ➔ 銀座補貨 ➔ 返台", mapDesc: "🚇 交通：日比谷線 / 轉 Skyliner 快速直達", mapUrl: "https://maps.google.com/?q=京成上野駅",
-            suggestedLeaveTime: "07:30（完成辦理退房，先將行李送去上野寄放）",
+            theme: "上野行李託管 ➔ 築地早餐 ➔ 銀座補貨 ➔ 返台", mapDesc: "🚇 交通：地下連通道轉日比谷線 / 回程 Skyliner 直達", mapUrl: "https://maps.google.com/?q=京成上野駅",
+            suggestedLeaveTime: "07:30（完成辦理退房，行李直接送去京成上野）",
             meals: { 
               breakfast: "築地 狐狸屋牛丼", breakfastAlt: "築地 壽司大",
               breakfastNoBeef: "築地 壽司大 (極上江戶前海鮮握壽司)",
@@ -378,10 +391,11 @@
               dinnerNoBeef: "成田機場 T1 壽司京辰 (登機前最後小酌居酒屋)"
             },
             timeline: [
-              { time: "07:30", title: "🚗 建議出發（拉大行李直奔上野）", desc: "辦理退房後，搭車直接前往<strong>京成上野站 / JR上野站</strong>，搶先鎖定置物櫃寄放所有大行李，徹底解放雙手！", tag: "先放行李", mapQuery: "京成上野駅" },
-              { time: "08:15", title: "築地場外市場海鮮早餐", desc: "輕鬆搭乘日比谷線至築地站，大啖狐狸屋牛丼、現烤生蠔與美味玉子燒。", mapQuery: "築地場外市場" },
-              { time: "11:00", title: "銀座商圈最後大補貨", desc: "步行或搭地鐵前往銀座，做最後的精品、藥妝、伴手禮衝刺，順便享用美味午餐（如：銀座 篝 拉麵）。", mapQuery: "銀座" },
-              { time: "15:00", title: "返回上野取行李 × Skyliner 衝機場", desc: "（避開傍晚隅田川煙火大會的混亂人潮）回到上野取回行李，搭乘 Skyliner 直奔成田機場第一航廈。", tag: "完美撤離", mapQuery: "京成上野駅" },
+              { time: "07:30", title: "🚗 建議出發（直奔京成上野站）", desc: "辦理退房後，搭車直接前往<strong>京成上野站</strong>寄放所有大行李。此時置物櫃最空、最好搶！", tag: "寄放京成上野", mapQuery: "京成上野駅" },
+              { time: "08:15", title: "轉乘地鐵日比谷線 ➔ 前往築地", desc: "寄完行李後，<span class='text-teal-600 font-bold'>直接走車站「地下連通道」步行 3-5 分鐘前往地鐵日比谷線（上野站）閘門，不需經過 JR 上野站</span>，直接搭車直達築地站！", tag: "免出站地下直通", mapQuery: "上野駅 日比谷線" },
+              { time: "08:45", title: "築地場外市場海鮮早餐", desc: "大啖熱騰騰的生魚丼飯、現烤生蠔或玉子燒，兩手空空逛街超級輕鬆。", mapQuery: "築地場外市場" },
+              { time: "11:00", title: "銀座商圈最後大補貨", desc: "從築地散步或搭地鐵前往銀座，做精品、藥妝、伴手禮的最後衝刺，並享用美味午餐。", mapQuery: "銀座" },
+              { time: "15:00", title: "返回京成上野取行李 × Skyliner 衝機場", desc: "回到<strong>京成上野站</strong>取回行李，直接刷卡進站搭乘 Skyliner 飛奔成田機場，完全避開傍晚煙火大會的恐怖人潮！", tag: "完美撤離", mapQuery: "京成上野駅" },
               { time: "16:00", title: "抵達成田機場辦理登機", desc: "前往成田機場第一航廈辦理登機與免稅店最後採購，準備搭機返台。", mapQuery: "成田国際空港" }
             ]
           }
